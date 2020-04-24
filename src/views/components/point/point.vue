@@ -1,7 +1,7 @@
 <!-- 散点图 -->
 <style scoped>
 .point{
-  background: url('../../../assets/bg.jpg') no-repeat;
+  background: #010e50 url(../../../assets/images/bigscreen.png) center top no-repeat;
   background-size: 100% 100%;}
   .main{
     width: 100%;
@@ -20,10 +20,6 @@
 import axios from 'axios'
 import echarts from 'echarts'
 import 'echarts/map/js/province/guangxi.js'
-// const USER_NAME = 'elastic'
-// const PSW = 'elasticl@ethical.cn'
-// const AUTH_TOKEN = 'Basic ' + btoa(USER_NAME + ':' + PSW)
-
 export default {
   created () {
     this.getCityData()
@@ -64,13 +60,10 @@ export default {
         let l = data.length
         let x = parseInt(Math.random() * l)
         let geoCoord = this.geoCoordMap[data[x].name]
-        // let geoCoord = this.geoCoordMap[data[i].name];
         if (geoCoord) {
           res.push({
             name: data[x].name,
-            // name: data[x].name,
             value: geoCoord.concat(Math.random() * 200)
-            // value: geoCoord.concat(data[i].value)
           })
         }
       }
@@ -79,7 +72,6 @@ export default {
     getMyChart () {
       axios.get('static/data/point/testData.json').then((res) => {
         let options = {
-          // backgroundColor: '#404a59',
           title: {
             show: false
           },

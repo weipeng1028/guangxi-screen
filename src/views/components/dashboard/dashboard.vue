@@ -1,7 +1,9 @@
 <template lang="html">
   <div class="dashboard">
-    <div class="title">
-      传播分析123
+    <div class="screen-title">
+      <div class="screen-bg">
+        新媒体大屏统计分析
+      </div>
     </div>
     <div class="flex-container column">
         <div class="item one" @click="clickChart('1')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
@@ -105,26 +107,30 @@ export default {
   height: 100%;
   margin: 0px;
   padding: 0px;
-  background: url('../../../assets/bg.jpg');
+  background: #010e50 url(../../../assets/images/bigscreen.png) center top no-repeat;
   background-size: 100% 100%;
 }
 .flex-container.column {
-  min-height: calc(100vh - 5rem);
+  min-height: calc(100vh - 8rem);
   position: relative;
   /* min-height: calc(100vh - 10%); */
   width: 100%;
   overflow: hidden;
   box-sizing: content-box;
 }
-.title{
-  height: 5rem;
-  margin: 0px;
-  padding: 0px;
-  background-size: 100% 100%;
+.screen-title {
+  display: block;
+  height: 8rem;
+  margin: 0 auto;
+}
+.screen-bg{
+  display: block;
+  background: url(../../../assets/images/TOP_BG.png) center top no-repeat;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   text-align: center;
+  line-height: 9rem;
   color: #fff;
-  font-size: 3rem;
-  line-height: 5rem;
+  font-size: 4rem;
 }
 .active {
   height: 100%;

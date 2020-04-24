@@ -2,7 +2,7 @@
 <style scoped>
 .columnChart{
   height: 800px;
-  background: url('../../../assets/bg.jpg') no-repeat;
+  background: #010e50 url(../../../assets/images/bigscreen.png) center top no-repeat;
   background-size: 100% 100%;
   color: white}
   .main{

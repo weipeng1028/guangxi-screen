@@ -17,23 +17,12 @@ let routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/views/components/dashboard/dashboard')
+  },
+  {
+    path: '/excellent',
+    name: 'Excellent',
+    component: () => import('@/views/bigscreen/Excellent.vue')
   }
-  // {
-  //   path: '/column',
-  //   component: () => import('@/views/components/column/column')
-  // },
-  // {
-  //   path: '/point',
-  //   component: () => import('@/views/components/point/point')
-  // },
-  // {
-  //   path: '/multipleColumn',
-  //   component: () => import('@/views/components/multipleColumn/multipleColumn')
-  // },
-  // {
-  //   path: '/line',
-  //   component: () => import('@/views/components/line/line')
-  // }
 ]
 const router = new Router({
   mode: 'history',

@@ -1,7 +1,9 @@
 <template>
   <div class="screen-box">
     <div class="screen-title">
-      新媒体大屏统计分析
+      <div class="screen-bg">
+        新媒体大屏统计分析
+      </div>
     </div>
     <div class="data-content">
       <div class="con-left">
@@ -456,18 +458,22 @@ export default {
   min-height: calc(100vh);
   margin: 0 auto;
   box-sizing: content-box;
-  background: #010e50 url(../../assets/images/map_bg.jpg) center top no-repeat;
+  background: #010e50 url(../../assets/images/bigscreen.png) center top no-repeat;
   background-size: 100% auto;
 }
 .screen-title {
   display: block;
   height: 8rem;
   margin: 0 auto;
+}
+.screen-bg{
+  display: block;
+  background: url(../../assets/images/TOP_BG.png) center top no-repeat;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   text-align: center;
   line-height: 9rem;
   color: #fff;
   font-size: 4rem;
-  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
 }
 .data-content {
   width: 100%;
