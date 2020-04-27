@@ -22,6 +22,7 @@
     "js-md5": "^0.7.3",
     "lodash": "^4.17.15",
     "node-sass": "^4.12.0",
+    "swiper": "^5.3.8",
     "vue": "^2.6.10",
     "vue-clock2": "^1.1.5",
     "vue-loader": "^15.7.1",
@@ -49,6 +50,7 @@
     "sass": "^1.22.9",
     "sass-loader": "^7.1.0",
     "svg-sprite-loader": "^4.1.6",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-template-compiler": "^2.6.10",
     "vue-ueditor-wrap": "^2.4.1"
   }
