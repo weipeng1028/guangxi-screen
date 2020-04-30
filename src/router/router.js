@@ -22,6 +22,11 @@ let routes = [
     path: '/excellent',
     name: 'Excellent',
     component: () => import('@/views/bigscreen/Excellent.vue')
+  },
+  {
+    path: '/analysis',
+    name: 'Analysis',
+    component: () => import('@/views/bigscreen/Analysis.vue')
   }
 ]
 const router = new Router({
