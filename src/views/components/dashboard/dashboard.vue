@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="dashboard">
-    <div class="screen-title">
+    <!-- <div class="screen-title">
       <div class="screen-bg">
         新媒体大屏统计分析
       </div>
-    </div>
+    </div> -->
     <div class="flex-container column">
         <div class="item one" @click="clickChart('1')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
           <multipleColumn></multipleColumn>
@@ -27,8 +27,6 @@
 import column from '@/views/components/column/column'
 import line from '@/views/components/line/line'
 import multipleColumn from '@/views/components/multipleColumn/multipleColumn'
-// import point from '@/views/components/point/point'
-
 export default {
   data () {
     return {
@@ -111,7 +109,7 @@ export default {
   background-size: 100% 100%;
 }
 .flex-container.column {
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh);
   position: relative;
   /* min-height: calc(100vh - 10%); */
   width: 100%;
@@ -119,7 +117,7 @@ export default {
   box-sizing: content-box;
 }
 .screen-title {
-  display: block;
+  display: none;
   height: 8rem;
   margin: 0 auto;
 }

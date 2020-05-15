@@ -26,7 +26,6 @@
             <p>优秀文章展示</p>
           </div>
           <div class="content">
-
           </div>
         </div>
       </div>
@@ -142,18 +141,19 @@ export default {
   min-height: calc(100vh);
   margin: 0 auto;
   box-sizing: content-box;
-  background: #010e50 url(../../assets/images/bigscreen.png) center top
-    no-repeat;
-  background-size: 100% auto;
+  background: #010e50 url(../../assets/images/bigscreen.png) center top no-repeat;
+  background-size: 100% 100%;
+  line-height: 1.15;
 }
 .screen-title {
   display: block;
   height: 8rem;
   margin: 0 auto;
 }
-.screen-bg {
+.screen-bg{
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
+  background-size: 100% 100;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   text-align: center;
   line-height: 9rem;

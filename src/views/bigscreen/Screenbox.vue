@@ -459,7 +459,8 @@ export default {
   margin: 0 auto;
   box-sizing: content-box;
   background: #010e50 url(../../assets/images/bigscreen.png) center top no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 100%;
+  line-height: 1.15;
 }
 .screen-title {
   display: block;
@@ -469,6 +470,7 @@ export default {
 .screen-bg{
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
+  background-size: 100% 100;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   text-align: center;
   line-height: 9rem;

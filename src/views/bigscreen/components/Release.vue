@@ -12,7 +12,7 @@
 <script>
 import echarts from 'echarts/lib/echarts' // echarts
 import 'echarts/lib/component/visualMap'
-require('echarts/lib/chart/line')
+require('echarts/lib/chart/bar')
 require('echarts/lib/component/tooltip')
 export default {
   data () {
@@ -152,22 +152,12 @@ export default {
         series: [
           {
             name: '微信',
-            type: 'line',
+            type: 'bar',
+            stack: '发布量',
             data: [15, 30, 45, 55, 60, 62, 80, 62, 60, 55, 45, 30, 15, 10],
             barWidth: 10,
             barGap: 0, // 柱间距离
-            // label: {//图形上的文本标签
-            //     normal: {
-            //       show: true,
-            //       position: 'top',
-            //       textStyle: {
-            //           color: '#a8aab0',
-            //           fontStyle: 'normal',
-            //           fontFamily: '微软雅黑',
-            //           fontSize: 12,
-            //       },
-            //     },
-            // },
+
             itemStyle: {
               normal: {
                 show: true,
@@ -177,30 +167,17 @@ export default {
                 }, {
                   offset: 1,
                   color: '#03fb55'
-                }]),
-                barBorderRadius: 50,
-                borderWidth: 0
+                }])
               }
             }
           },
           {
             name: '微博',
-            type: 'line',
+            type: 'bar',
+            stack: '发布量',
             data: [8, 25, 30, 35, 55, 62, 65, 55, 60, 45, 42, 15, 12, 5],
             barWidth: 10,
-            barGap: 0, // 柱间距离
-            // label: {//图形上的文本标签
-            //     normal: {
-            //       show: true,
-            //       position: 'top',
-            //       textStyle: {
-            //           color: '#a8aab0',
-            //           fontStyle: 'normal',
-            //           fontFamily: '微软雅黑',
-            //           fontSize: 12,
-            //       },
-            //     },
-            // },
+
             itemStyle: {
               normal: {
                 show: true,
@@ -210,30 +187,18 @@ export default {
                 }, {
                   offset: 1,
                   color: '#69CBF2'
-                }]),
-                barBorderRadius: 50,
-                borderWidth: 0
+                }])
               }
             }
           },
           {
             name: '网站',
-            type: 'line',
+            type: 'bar',
+            stack: '发布量',
             data: [9, 20, 33, 30, 66, 82, 52, 41, 66, 81, 17, 28, 33, 60],
             barWidth: 10,
             barGap: 0, // 柱间距离
-            // label: {//图形上的文本标签
-            //     normal: {
-            //       show: true,
-            //       position: 'top',
-            //       textStyle: {
-            //           color: '#a8aab0',
-            //           fontStyle: 'normal',
-            //           fontFamily: '微软雅黑',
-            //           fontSize: 12,
-            //       },
-            //     },
-            // },
+
             itemStyle: {
               normal: {
                 show: true,
@@ -243,30 +208,18 @@ export default {
                 }, {
                   offset: 1,
                   color: '#5768EF'
-                }]),
-                barBorderRadius: 50,
-                borderWidth: 0
+                }])
               }
             }
           },
           {
             name: '头条',
-            type: 'line',
+            type: 'bar',
+            stack: '发布量',
             data: [60, 31, 52, 55, 75, 10, 80, 44, 31, 20, 80, 33, 23, 40],
             barWidth: 10,
             barGap: 0, // 柱间距离
-            // label: {//图形上的文本标签
-            //     normal: {
-            //       show: true,
-            //       position: 'top',
-            //       textStyle: {
-            //           color: '#a8aab0',
-            //           fontStyle: 'normal',
-            //           fontFamily: '微软雅黑',
-            //           fontSize: 12,
-            //       },
-            //     },
-            // },
+
             itemStyle: {
               normal: {
                 show: true,
@@ -276,9 +229,7 @@ export default {
                 }, {
                   offset: 1,
                   color: '#fffaa0'
-                }]),
-                barBorderRadius: 50,
-                borderWidth: 0
+                }])
               }
             }
           }
