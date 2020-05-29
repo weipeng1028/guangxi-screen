@@ -4,18 +4,23 @@
       <div class="top-box">
         <div>
           <p class="name">微博粉丝数</p>
-          <p class="num">1008611</p>
+          <p class="num"
+                     v-text="this.wbFans"></p>
         </div>
       </div>
       <div class="top-box">
         <div>
           <p class="name">微信关注总条数</p>
-          <p class="num">1008611</p>
+          <p class="num"
+                     v-text="this.wxFans"></p>
         </div>
       </div>
     </div>
     <!-- 区排行榜图表 -->
     <div class="area-article area-rank">
+      <!-- <p class="title">
+        区排行榜
+      </p> -->
       <p class="tab-title">
         <span @click="titleTabs(true)"
               class="district"
@@ -54,40 +59,39 @@
           </ul>
         </div>
       </div>
-      <div id="area-rank-tuxing"
-           class="article-content"
-           v-else>
-        <p class="article-top">
-          <span style="width:10%;text-align: left;">排名</span>
-          <span style="width:15%;text-align: left;">渠道</span>
-          <span class="company">文章标题</span>
-          <span style="width:15%;text-align: center;">热度</span>
-        </p>
-        <div id="area-article"
-             class="tubiao-size">
-             <!-- :class="{anim:animateHot}" -->
-          <ul class="new-list"
-              @mouseenter="StopHot()"
-              @mouseleave="UpHot()">
-            <li v-for="(item,index) in arr"
-                :key="index"
-                class="show-article">
-              <span style="width:10%;text-align: left;">{{item.num}}</span>
-              <span v-if="item.source===1"
-                    style="width:15%;text-align: left;">微信</span>
-              <span v-if="item.source===2"
-                    style="width:15%;text-align: left;">微博</span>
-              <span v-if="item.source===4"
-                    style="width:15%;text-align: left;">头条</span>
-              <span v-if="item.source===5"
-                    style="width:15%;text-align: left;">抖音</span>
-              <span @click="activeWeb(item)"
-                    class="company">{{item.title}}</span>
-              <span style="width:15%;text-align: center;">{{item.hotnum}}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <div id="area-rank-tuxing" v-else
+                   class="article-content">
+                <p class="article-top">
+                  <span style="width:10%;text-align: left;">排名</span>
+                  <span style="width:15%;text-align: left;">渠道</span>
+                  <span class="company">文章标题</span>
+                  <span style="width:15%;text-align: center;">热度</span>
+                </p>
+                <div id="area-article"
+                     class="tubiao-size">
+                  <ul class="new-list"
+                      :class="{anim:animateHot}"
+                      @mouseenter="StopHot()"
+                      @mouseleave="UpHot()">
+                    <li v-for="(item,index) in arr"
+                        :key="index"
+                        class="show-article">
+                      <span style="width:10%;text-align: left;">{{item.num}}</span>
+                      <span v-if="item.source===1"
+                            style="width:15%;text-align: left;">微信</span>
+                      <span v-if="item.source===2"
+                            style="width:15%;text-align: left;">微博</span>
+                      <span v-if="item.source===4"
+                            style="width:15%;text-align: left;">头条</span>
+                      <span v-if="item.source===5"
+                            style="width:15%;text-align: left;">抖音</span>
+                      <span @click="activeWeb(item)"
+                            class="company">{{item.title}}</span>
+                      <span style="width:15%;text-align: center;">{{item.hotnum}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
     </div>
   </div>
 </template>
@@ -96,9 +100,14 @@ export default {
   data () {
     return {
       areaRank: '',
+      wxFans: '1008611',
+      wbFans: '1008611',
+      animateRank: false,
+      animateHot: false, // 文章排行榜类名设置
       regionData: [], // 地区数据
       // 热门文章排行榜
-      arr: []
+      arr: [],
+      att: []
     }
   },
   methods: {
@@ -167,11 +176,32 @@ export default {
           }, 500)
         }, 1000)
       }
+    },
+    // 三位数添加逗号
+    appendNum (n) {
+      var b = parseInt(n).toString()
+      var len = b.length
+      if (len <= 3) { return b }
+      var r = len % 3
+      return r > 0 ? b.slice(0, r) + ',' + b.slice(r, len).match(/\d{3}/g).join(',') : b.slice(r, len).match(/\d{3}/g).join(',')
+    },
+    // 微信微博粉丝关注数
+    getFans () {
+      this.$http.get(this.$api.fans)
+        .then(res => {
+          if (res.data.data) {
+            this.wxFans = this.appendNum(res.data.data.wxFansNum)
+            this.wbFans = this.appendNum(res.data.data.wbFansNum)
+          }
+        })
+        .catch(() => {
+        })
     }
   },
   created () {
-    // this.ScrollRank() // 区排行榜动画触发
-    // this.ScrollHot() // 热门文章排行榜动画触发
+    this.getDistrictRanking() // 区排行榜动画触发
+    this.gethotArticles() // 热门文章排行榜动画触发
+    this.getFans()
   }
 }
 </script>
@@ -200,14 +230,12 @@ export default {
 .top-box .name {
   color: #fff;
   font-size: 1.5rem;
-  line-height: 4rem;
   text-align: center;
 }
 .top-box .num {
   color: #00ceff;
   font-size: 3rem;
   text-align: center;
-  line-height: 4rem;
 }
 .district,
 .hot-article {
@@ -280,8 +308,8 @@ export default {
   display: flex;
   font-size: 1.5rem;
   justify-content: space-between;
-  width: 99%;
-  height: 20%;
+  width: 100%;
+  height: 4rem;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
@@ -297,7 +325,7 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9)
 }
 .tubiao-size {
-  height: 80%;
+  height: calc(100% - 4rem);
   margin: 0 auto;
   overflow: hidden;
 }
@@ -319,5 +347,14 @@ export default {
   padding: 0 15px;
   height: 4rem;
   line-height: 4rem;
+}
+.company {
+  display: inline-block;
+  width: 65%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  text-align: left;
 }
 </style>

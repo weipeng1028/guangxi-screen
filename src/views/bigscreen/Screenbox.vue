@@ -21,9 +21,9 @@
           <div id="map-show"
                class="cen-top map"></div>
         </div>
-        <div class="center-bottom">
+        <!-- <div class="center-bottom">
           <read></read>
-        </div>
+        </div> -->
       </div>
       <div class="con-right">
         <div class="right-top">
@@ -78,7 +78,7 @@
           </div>
         </div>
         <div class="right-bottom">
-          <hot-article></hot-article>
+          <read></read>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@
 <script>
 import region from './components/Region.vue'
 // import newArticle from './components/Article.vue'
-import hotArticle from './components/HotArticle.vue'
+// import hotArticle from './components/HotArticle.vue'
 import release from './components/Release.vue'
 import read from './components/Read.vue'
 import echarts from 'echarts/lib/echarts' // echarts
@@ -103,11 +103,11 @@ require('echarts/lib/component/tooltip')
 export default {
   data () {
     return {
-      regions: '', // 地区文章参数
-      totalPublish: '1008611',
+      regions: '河池市', // 地区文章参数
+      totalPublish: '',
       typeof: '微信最新文章列表',
       animateList: false,
-      articleType: '', // 地区文章参数类型
+      articleType: 1, // 地区文章参数类型
       wxActive: true,
       wbActive: false,
       dyActive: false,
@@ -115,213 +115,139 @@ export default {
       articleList: [], // 文章列表数据
       intNumList: null, // 文章轮播
       fhourTime: null, // 地图轮播
-      data: [
-        {
-          name: '桂林市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '贺州市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '梧州市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '玉林市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '北海市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '防城港市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '钦州市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '崇左市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '百色市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '河池市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '柳州市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '南宁市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '贵港市',
-          value: Math.round(Math.random() * 100)
-        }, {
-          name: '来宾市',
-          value: Math.round(Math.random() * 100)
-        }
-      ]
+      data: []
     }
   },
   methods: {
     // 地图
     monitorMap () {
       let monitorMap = echarts.init(document.getElementById('map-show'))
-      let option = {
-        tooltip: {
-          trigger: 'item',
-          show: true,
-          backgroundColor: 'rgba(0,0,0,.8)',
-          textStyle: {
-            color: '#00ceff',
-            decoration: 'none',
-            fontFamily: 'Verdana, sans-serif',
-            fontSize: 25,
-            fontWeight: 'bold'
-          }
-          // formatter: function (params, ticket, callback) {
-          //   return '地区名称：' + params.data.name +
-          //     '<br/>' + '微信：' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan + '<br/>' + '微博：' + '<br/>' + '点赞数：' + params.data.wbDianzan + '<br/>' + '评论数：' + params.data.wbPinglun + '<br/>' + '转发数：' + params.data.wbZhuanfa
-          // }
-        },
-        visualMap: {
-          min: 0,
-          max: 100,
-          left: 40,
-          top: 'bottom',
-          text: ['高', '低'],
-          calculable: true,
-          inRange: {
-            color: ['#fffaa0', '#E0DAFF', '#ADBFFF', '#9CB4FF', '#6A9DFF', '#3889FF']
-          }
-        },
-        // toolbox: {
-        //   show: true,
-        //   orient: 'vertical',
-        //   left: 'right',
-        //   top: 'center',
-        //   feature: {
-        //     dataView: {
-        //       readOnly: false
-        //     },
-        //     restore: {},
-        //     saveAsImage: {}
-        //   }
-        // },
-        geo: {
-          map: '广西',
-          zoom: 1.2,
-          label: {
-            normal: {
-              show: true,
-              fontSize: 20, // 文字大小
-              color: '#fb6a00' // 文字颜色
-            },
-            emphasis: {
-              show: true,
-              color: '#013364'
+      this.$http.get(this.$api.regions, { params: { id: this.articleType } })
+        .then(res => {
+          this.data = res.data.data
+          var maxValue = []
+          this.data.forEach(item => {
+            if (item.wxRead) {
+              item.value = item.wxRead
+              maxValue.push(item.wxRead)
+            } else if (item.wbDianzan) {
+              item.value = item.wbDianzan
+              maxValue.push(item.wbDianzan)
+            } else if (item.jrttRead) {
+              item.value = item.jrttRead
+              maxValue.push(item.jrttRead)
+            } else if (item.dyDianzan) {
+              item.value = item.dyDianzan
+              maxValue.push(item.dyDianzan)
             }
-          },
-          roam: true,
-          itemStyle: {
-            normal: {
-              areaColor: '#fbfbfb',
-              borderColor: '#b9b4b7'
-
-            },
-            emphasis: {
-              areaColor: '#05ff09'
-            }
-          }
-        },
-        series: [
-          {
-            type: 'map',
-            name: '广西',
-            map: '广西',
-            geoIndex: 0,
-            label: {
-              normal: {
-                show: true
+          })
+          let option = {
+            tooltip: {
+              show: true,
+              backgroundColor: 'rgba(0,0,0,.8)',
+              textStyle: {
+                color: '#00ceff',
+                decoration: 'none',
+                fontFamily: 'Verdana, sans-serif',
+                fontSize: 25,
+                fontWeight: 'bold'
               },
-              emphasis: {
-                show: true
+              formatter: function (params, ticket, callback) {
+                if (params.data.wxRead) {
+                  return '地区名称：' + params.data.name +
+                      '<br/>' + '微信：' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan
+                } else if (params.data.wbDianzan) {
+                  return '地区名称：' + params.data.name +
+                      '<br/>' + '微博：' + '<br/>' + '点赞数：' + params.data.wbDianzan + '<br/>' + '评论数：' + params.data.wbPinglun + '<br/>' + '转发数：' + params.data.wbZhuanfa
+                } else if (params.data.jrttRead) {
+                  return '地区名称：' + params.data.name +
+                      '<br/>' + '今日头条：' + '<br/>' + '阅读数：' + params.data.jrttRead + '<br/>' + '评论数：' + params.data.jrttPinglun + '<br/>' + '转发数：' + params.data.jrttZhuanfa
+                } else if (params.data.dyDianzan) {
+                  return '地区名称：' + params.data.name +
+                      '<br/>' + '抖音：' + '<br/>' + '点赞数：' + params.data.dyDianzan + '<br/>' + '评论数：' + params.data.dyPinglun + '<br/>' + '转发数：' + params.data.dyZhuanfa
+                }
               }
             },
-            data: this.data
-          }]
-      }
-      this.mapOption = option
-      this.monitor = monitorMap
-      monitorMap.setOption(option)
-      window.onresize = monitorMap.resize
-      let than = this
-      monitorMap.on('click', function (e) {
-        clearInterval(than.fhourTime)
-        than.fhourTime = undefined
-        than.regions = e.name
-        if (than.articleType) {
-          than.checkdTab(than.articleType)
-        } else {
-          than.checkdTab(1)
-        }
-      })
-      // 地图定义轮播
-      var hourIndex = 0
-      clearInterval(than.fhourTime)
-      than.fhourTime = undefined
-      than.fhourTime = setInterval(function () {
-        monitorMap.dispatchAction({
-          type: 'downplay',
-          seriesIndex: 0
-        })
-        monitorMap.dispatchAction({
-          type: 'highlight',
-          seriesIndex: 0,
-          dataIndex: hourIndex
-        })
-        monitorMap.dispatchAction({
-          type: 'showTip',
-          seriesIndex: 0,
-          dataIndex: hourIndex
-        })
+            visualMap: {
+              min: 0,
+              max: Math.max.apply(null, maxValue),
+              left: 40,
+              textStyle: {
+                color: '#fff'
+              },
+              top: 'bottom',
+              text: ['高', '低'],
+              calculable: true,
+              inRange: {
+                color: ['#fffaa0', '#E0DAFF', '#ADBFFF', '#9CB4FF', '#6A9DFF', '#3889FF']
+              }
+            },
+            geo: {
+              map: '广西',
+              zoom: 1.2,
+              label: {
+                normal: {
+                  show: true,
+                  fontSize: 20, // 文字大小
+                  color: '#fb6a00' // 文字颜色
+                },
+                emphasis: {
+                  show: true,
+                  color: '#013364'
+                }
+              },
+              roam: true,
+              itemStyle: {
+                normal: {
+                  areaColor: '#fbfbfb',
+                  borderColor: '#b9b4b7'
 
-        if (than.data[hourIndex]) {
-          than.regions = than.data[hourIndex].name
-          if (than.articleType) {
-            than.checkdTab(than.articleType)
-          } else {
-            than.checkdTab(1)
+                },
+                emphasis: {
+                  areaColor: '#05ff09'
+                }
+              }
+            },
+            series: [
+              {
+                type: 'map',
+                name: '广西',
+                map: '广西',
+                geoIndex: 0,
+                label: {
+                  normal: {
+                    show: true
+                  },
+                  emphasis: {
+                    show: true
+                  }
+                },
+                data: this.data
+              }]
           }
-        }
-        hourIndex++
-        if (hourIndex === than.data.length) {
-          hourIndex = 0
-        }
-      }, 1000)
-      // 鼠标移入停止轮播
-      monitorMap.on('mousemove', function (e) {
-        clearInterval(than.fhourTime)
-        than.fhourTime = undefined
-        monitorMap.dispatchAction({
-          type: 'downplay',
-          seriesIndex: 0
-        })
-        monitorMap.dispatchAction({
-          type: 'highlight',
-          seriesIndex: 0,
-          dataIndex: e.dataIndex
-        })
-        monitorMap.dispatchAction({
-          type: 'showTip',
-          seriesIndex: 0,
-          dataIndex: e.dataIndex
-        })
-      })
-      // 鼠标移出恢复轮播
-      monitorMap.on('mouseout', function () {
-        if (!than.fhourTime) {
-          than.fhourTime = setInterval(function () {
+          this.mapOption = option
+          this.monitor = monitorMap
+          monitorMap.setOption(option)
+          window.onresize = monitorMap.resize
+          let than = this
+          monitorMap.on('click', function (e) {
+            clearInterval(than.fhourTime)
+            than.fhourTime = undefined
+            than.region = e.name
+            than.idx = undefined
             than.cityShow = false
+            than.getarticle()
+          })
+          // 地图定义轮播
+          var hourIndex = 0
+          clearInterval(than.fhourTime)
+          than.fhourTime = undefined
+          monitorMap.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: 13
+          })
+          than.fhourTime = setInterval(function () {
             monitorMap.dispatchAction({
               type: 'downplay',
               seriesIndex: 0
@@ -337,28 +263,75 @@ export default {
               dataIndex: hourIndex
             })
 
-            if (than.data[hourIndex]) {
-              than.regions = than.data[hourIndex].name
-              if (than.articleType) {
-                than.checkdTab(than.articleType)
-              } else {
-                than.checkdTab(1)
-              }
+            if (than.regions[hourIndex]) {
+              than.region = than.regions[hourIndex].name
+              than.getarticle()
             }
             hourIndex++
             if (hourIndex === than.data.length) {
               hourIndex = 0
             }
-          }, 1000)
-        }
-      })
+          }, 10000)
+          // 鼠标移入停止轮播
+          monitorMap.on('mousemove', function (e) {
+            clearInterval(than.fhourTime)
+            than.fhourTime = undefined
+            monitorMap.dispatchAction({
+              type: 'downplay',
+              seriesIndex: 0
+            })
+            monitorMap.dispatchAction({
+              type: 'highlight',
+              seriesIndex: 0,
+              dataIndex: e.dataIndex
+            })
+            monitorMap.dispatchAction({
+              type: 'showTip',
+              seriesIndex: 0,
+              dataIndex: e.dataIndex
+            })
+          })
+          // 鼠标移出恢复轮播
+          monitorMap.on('mouseout', function () {
+            if (!than.fhourTime) {
+              than.fhourTime = setInterval(function () {
+                than.cityShow = false
+                monitorMap.dispatchAction({
+                  type: 'downplay',
+                  seriesIndex: 0
+                })
+                monitorMap.dispatchAction({
+                  type: 'highlight',
+                  seriesIndex: 0,
+                  dataIndex: hourIndex
+                })
+                monitorMap.dispatchAction({
+                  type: 'showTip',
+                  seriesIndex: 0,
+                  dataIndex: hourIndex
+                })
+
+                if (than.regions[hourIndex]) {
+                  than.region = than.regions[hourIndex].name
+                  than.getarticle()
+                }
+                hourIndex++
+                if (hourIndex === than.regions.length) {
+                  hourIndex = 0
+                }
+              }, 10000)
+            }
+          })
+        })
+        .catch(() => {
+        })
     },
     // 地区文章数据***
     checkdTab (type) {
-      this.articleType = type
       if (!type) {
         type = 1
       }
+      this.articleType = type
       switch (type) {
         case 1:
           this.typeof = '微信最新文章列表'
@@ -390,26 +363,82 @@ export default {
           this.tdActive = false
           break
       }
-      // this.StopList()
-      // this.$http.get(this.$api.channelsLatestReadNum, { params: { id: type, region: this.regions } })
-      //   .then(res => {
-      //     if (res.data.data) {
-      //       this.articleList = res.data.data
-      //       this.UpList()
-      //     }
-      //   })
-      //   .catch(() => {
-      //   })
+      this.monitorMap()
+      this.getarticle()
+    },
+    // 地区文章数据获取
+    getarticle () {
+      this.StopList()
+      var titles = ''
+      var reg = /[\u4e00-\u9fa5]/g
+      this.$http.get(this.$api.channelsLatestReadNum, { params: { id: this.articleType, region: this.regions } })
+        .then(res => {
+          if (res.data.data) {
+            this.articleList = res.data.data
+            if (this.articleType === 1) {
+              this.typeof = '微信最新文章列表'
+              this.wxActive = true
+              this.wbActive = false
+              this.dyActive = false
+              this.tdActive = false
+            } else if (this.articleType === 2) {
+              this.typeof = '微博最新文章列表'
+              this.wxActive = false
+              this.wbActive = true
+              this.dyActive = false
+              this.tdActive = false
+            } else if (this.articleType === 3) {
+              this.typeof = '头条最新文章列表'
+              this.wxActive = false
+              this.wbActive = false
+              this.dyActive = false
+              this.tdActive = true
+            } else {
+              this.typeof = '抖音最新文章列表'
+              this.wxActive = false
+              this.wbActive = false
+              this.dyActive = true
+              this.tdActive = false
+            }
+            this.articleList.forEach(item => {
+              if (item.title) {
+                titles = item.title.match(reg)
+                item.title = titles.join('')
+              } else {
+                item.title = '转发微博'
+              }
+            })
+            this.UpList()
+          }
+        })
+        .catch(() => {
+        })
+    },
+    activeWeb (item) {
+      window.open(item.url, '_black')
     },
     // 文章列表动画
     ScrollList () {
-      if (this.ayy.length > 10) {
+      if (this.articleList.length > 10) {
         this.intNumList = setInterval(() => {
           this.animateList = true // 向上滚动的时候需要添加css3过渡动画
           setTimeout(() => {
-            this.ayy.push(this.ayy[0]) // 将数组的第一个元素添加到数组的
-            this.ayy.shift() // 删除数组的第一个元素
+            this.articleList.push(this.articleList[0]) // 将数组的第一个元素添加到数组的
+            this.articleList.shift() // 删除数组的第一个元素
             this.animateList = false
+          }, 500)
+        }, 1000)
+      }
+    },
+    // 热门文章
+    ScrollHot () {
+      if (this.arr.length > 10) {
+        this.intNumHot = setInterval(() => {
+          this.animateHot = true // 向上滚动的时候需要添加css3过渡动画
+          setTimeout(() => {
+            this.arr.push(this.arr[0]) // 将数组的第一个元素添加到数组的
+            this.arr.shift() // 删除数组的第一个元素
+            this.animateHot = false
           }, 500)
         }, 1000)
       }
@@ -424,6 +453,14 @@ export default {
         this.ScrollList()
       }
     },
+    // 三位数添加逗号
+    appendNum (n) {
+      var b = parseInt(n).toString()
+      var len = b.length
+      if (len <= 3) { return b }
+      var r = len % 3
+      return r > 0 ? b.slice(0, r) + ',' + b.slice(r, len).match(/\d{3}/g).join(',') : b.slice(r, len).match(/\d{3}/g).join(',')
+    },
     // 总文章发布数
     getTotalPublish () {
       this.$http.get(this.$api.totalPublish)
@@ -437,8 +474,8 @@ export default {
     }
   },
   created () {
-    // this.getTotalPublish()
-    // this.checkdTab()
+    this.getTotalPublish()
+    this.getarticle() // 最新文章
   },
   mounted () {
     this.monitorMap()
@@ -447,8 +484,7 @@ export default {
   components: {
     region,
     release,
-    read,
-    hotArticle
+    read
   }
 }
 </script>
@@ -499,7 +535,7 @@ export default {
   height: 55%;
 }
 .center-top {
-  height: 64%;
+  height: 100%;
 }
 .center-bottom {
   position: relative;
@@ -544,14 +580,12 @@ export default {
 .top-box .name {
   color: #fff;
   font-size: 1.5rem;
-  line-height: 4rem;
   text-align: center;
 }
 .top-box .num {
   color: #00ceff;
   font-size: 3rem;
   text-align: center;
-  line-height: 4rem;
 }
 .area-article {
   height: 80%;
@@ -570,9 +604,6 @@ export default {
   border: none;
   cursor: pointer;
   font-size: 1.5rem;
-  /* border: 1px solid #00ceff;
-  box-shadow:  0 2px 12px 0 #00ceff;
-  background-color: rgba($color: #fff, $alpha: 0.1) */
 }
 .title-tabs span img {
   height: 2rem;
@@ -600,7 +631,7 @@ export default {
   display: flex;
   font-size: 1.5rem;
   justify-content: space-between;
-  width: 99%;
+  width: 100%;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
@@ -609,7 +640,7 @@ export default {
   /* background-color: rgba(79, 41, 248,0.3); */
 }
 .tubiao-size {
-  height: 80%;
+  height: calc(100% - 4rem);
   margin: 0 auto;
   overflow: hidden;
 }
@@ -631,6 +662,12 @@ export default {
   padding: 0 15px;
   height: 4rem;
   line-height: 4rem;
+}
+.new-company{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
 }
 .release-box{
   width: 98%;

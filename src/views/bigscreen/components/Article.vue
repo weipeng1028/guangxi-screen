@@ -144,8 +144,8 @@ export default {
     }
   },
   created () {
-    // this.getTotalPublish()
-    // this.checkdTab()
+    this.getTotalPublish()
+    this.checkdTab()
   }
 }
 </script>
@@ -175,14 +175,12 @@ export default {
 .top-box .name {
   color: #fff;
   font-size: 1.5rem;
-  line-height: 4rem;
   text-align: center;
 }
 .top-box .num {
   color: #00ceff;
   font-size: 3rem;
   text-align: center;
-  line-height: 4rem;
 }
 .area-article {
   height: 80%;
@@ -232,7 +230,7 @@ export default {
   display: flex;
   font-size: 1.5rem;
   justify-content: space-between;
-  width: 99%;
+  width: 100%;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
@@ -241,7 +239,7 @@ export default {
   /* background-color: rgba(79, 41, 248,0.3); */
 }
 .tubiao-size {
-  height: 80%;
+  height: calc(100% - 4rem);
   margin: 0 auto;
   overflow: hidden;
 }
