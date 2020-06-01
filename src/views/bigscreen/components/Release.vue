@@ -26847,6 +26847,9 @@ export default {
         }
 
       ]
+      var positionLeft = 10
+      var showImg = new Image()
+      showImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAoCAYAAAAhf6DEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAA6SURBVEhLY2x8/vY/A4mg3zwcTDOBSTLBqGYSwahmEsGoZhLBqGYSwahmEsGoZhLBqGYSwZDUzMAAAJldBMF2UASmAAAAAElFTkSuQmCC'
       var playInterval = 50
       // 千分位
       function formatNum (strNum) {
@@ -26862,15 +26865,15 @@ export default {
         if (!/^(\+|-)?(\d+)(\.\d+)?$/.test(strNum)) {
           return strNum
         }
-        var a = RegExp.$1
+        // var a = RegExp.$1
         var b = RegExp.$2
-        var c = RegExp.$3
+        // var c = RegExp.$3
         var re = new RegExp()
         re.compile('(\\d)(\\d{3})(,|$)')
         while (re.test(b)) {
           b = b.replace(re, '$1,$2$3')
         }
-        return a + '' + b + '' + c
+        return b
       }
       // 基础设置
       var option = {
@@ -26925,8 +26928,8 @@ export default {
             })
           },
           grid: [{
-            left: '5%',
-            right: '10%',
+            left: '3%',
+            right: '20%',
             top: '5%',
             height: 'auto',
             bottom: '10%'
@@ -26937,38 +26940,63 @@ export default {
           yAxis: [{
 
           }],
-          series: [{
-            id: 'bar',
-            type: 'bar',
-            barWidth: '20',
-            tooltip: {
-              show: false
+          series: [
+            { // 间距
+              type: 'bar',
+              barWidth: 20,
+              stack: 'b',
+              legendHoverLink: false,
+              itemStyle: {
+                normal: {
+                  color: 'rgba(0,0,0,0)'
+                }
+              },
+              data: [positionLeft, positionLeft, positionLeft, positionLeft, positionLeft, positionLeft, positionLeft]
             },
-            label: {
-              normal: {
-                show: true,
-                position: 'right'
-              }
-            },
-            data: []
-          }]
+            {
+              id: 'bar',
+              type: 'bar',
+              itemStyle: {
+                color: {
+                  image: showImg,
+                  repeat: 'repeat'
+                }
+              },
+              barWidth: 20,
+              stack: 'b',
+              yAxisIndex: 0,
+              tooltip: {
+                show: false
+              },
+              label: {
+                normal: {
+                  show: true,
+                  position: 'right',
+                  distance: 10,
+                  formatter: function (param) {
+                    return param.value + '%'
+                  },
+                  textStyle: {
+                    color: '#ffffff',
+                    fontSize: '16'
+                  }
+                }
+              },
+              data: []
+            }
+          ]
         },
         options: []
       }
-      var xMaxInterval = 5
       for (var i = 0; i < rankData.length; i++) {
         var xMax = 20
         if (rankData[i].data[0].value > 20) {
           xMax = 'dataMax'
         }
-        if (rankData[i].data[0].value / xMaxInterval >= 10) {
-          xMaxInterval = rankData[i].data[0].value / 5
-        }
         option.options.push({
           xAxis: [{
             show: true,
             type: 'value',
-            interval: xMaxInterval,
             max: xMax,
             axisTick: {
               show: false
@@ -27025,53 +27053,75 @@ export default {
               return ele.name
             }).reverse()
           }],
-          series: [{
-            id: 'bar',
-            itemStyle: {
-              normal: {
-                color: function (params) {
-                  var colorListr = [
-                    '#0f4471',
-                    '#00adb5',
-                    '#ff5722',
-                    '#5628b4',
-                    '#20BF55',
-                    '#f23557',
-                    '#118df0',
-                    '#11cbd7',
-                    '#d3327b',
-                    '#ae318a',
-                    '#993090',
-                    '#6f3071'
-                  ]
-                  return colorListr[params.dataIndex]
-                },
-                label: {
-                  show: true,
-                  position: 'top',
-                  formatter: '{c}%'
-                },
-                shadowBlur: 20,
-                shadowColor: 'rgba(40, 40, 40, 0.5)'
-              }
-            },
-            label: {
-              normal: {
-                position: 'right',
-                formatter: function (p) {
-                  return p.name + ': ' + formatNum(p.value)
+          series: [
+            { // 间距
+              type: 'bar',
+              barWidth: 20,
+              stack: 'b',
+              legendHoverLink: false,
+              itemStyle: {
+                normal: {
+                  color: 'rgba(0,0,0,0)'
                 }
-              }
+              },
+              data: [positionLeft, positionLeft, positionLeft, positionLeft, positionLeft, positionLeft, positionLeft]
             },
-            data: rankData[i].data.map(function (ele) {
-              return ele.value
-            }).sort(function (a, b) {
-              return a > b
-            })
-          }]
+            {
+              id: 'bar',
+              itemStyle: {
+                normal: {
+                  // color: function (params) {
+                  //   var colorListr = [
+                  //     '#0f4471',
+                  //     '#00adb5',
+                  //     '#ff5722',
+                  //     '#5628b4',
+                  //     '#20BF55',
+                  //     '#f23557',
+                  //     '#118df0',
+                  //     '#11cbd7',
+                  //     '#d3327b',
+                  //     '#ae318a',
+                  //     '#993090',
+                  //     '#6f3071'
+                  //   ]
+                  //   return colorListr[params.dataIndex]
+                  // },
+                  label: {
+                    show: true,
+                    position: 'top',
+                    formatter: '{c}%'
+                  },
+                  shadowBlur: 20,
+                  shadowColor: 'rgba(40, 40, 40, 0.5)'
+                },
+                color: {
+                  image: showImg,
+                  repeat: 'repeat'
+                }
+              },
+              stack: 'b',
+              yAxisIndex: 0,
+              label: {
+                normal: {
+                  position: 'right',
+                  formatter: function (p) {
+                    return p.name + ': ' + formatNum(p.value)
+                  }
+                }
+              },
+              data: rankData[i].data.map(function (ele) {
+                return ele.value
+              }).sort(function (a, b) {
+                return a > b
+              })
+            }]
         })
       }
-      monitorBar.setOption(option)
+      monitorBar.setOption(option, true)
+      this.timer = setInterval(() => {
+        monitorBar.setOption(option, true)
+      }, 40000)
       window.addEventListener('resize', function () {
         monitorBar.resize()
       })
@@ -27080,6 +27130,10 @@ export default {
   },
   mounted () {
     this.getRelease()
+  },
+  destroyed () {
+    clearInterval(this.timer)
+    this.timer = null
   }
 }
 </script>

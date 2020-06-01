@@ -21,9 +21,6 @@
           <div id="map-show"
                class="cen-top map"></div>
         </div>
-        <!-- <div class="center-bottom">
-          <read></read>
-        </div> -->
       </div>
       <div class="con-right">
         <div class="right-top">
