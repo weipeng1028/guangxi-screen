@@ -15,5 +15,7 @@ export default {
   channelsLatestReadNum: '/channelsLatestReadNum', // GET 热门文章排行
   fans: '/fans', // GET 微信微博粉丝关注数
   cityBehavioralData: '/cityBehavioralData', // GET 地区数据
-  cityHotArticles: '/cityHotArticles' // GET 市级别各渠道热门文章
+  cityHotArticles: '/cityHotArticles', // GET 市级别各渠道热门文章
+  excellentArticles: 'excellentArticles', // 优秀文章图片
+  monthReadDifference: 'monthReadDifference' // 热门文章趋势
 }

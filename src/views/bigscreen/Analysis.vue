@@ -15,8 +15,6 @@
               <el-radio-group v-model="regiontyp">
                 <el-radio label="wx">微信公众号</el-radio>
                 <el-radio label="wb">微博</el-radio>
-                <el-radio label="tt">头条</el-radio>
-                <el-radio label="dy">抖音</el-radio>
               </el-radio-group>
             </div>
             <div class="region-name">
