@@ -16,6 +16,17 @@ export default {
   fans: '/fans', // GET 微信微博粉丝关注数
   cityBehavioralData: '/cityBehavioralData', // GET 地区数据
   cityHotArticles: '/cityHotArticles', // GET 市级别各渠道热门文章
-  excellentArticles: 'excellentArticles', // 优秀文章图片
-  monthReadDifference: 'monthReadDifference' // 热门文章趋势
+  excellentArticles: '/excellentArticles', // 优秀文章图片
+  monthReadDifference: '/monthReadDifference', // 热门文章趋势
+  // 传播分析
+  wxInformation: '/wxInformation', // 获取微信账号信息
+  wbInformation: '/wbInformation', // 获取微博账号信息
+  wxPublishArticles: '/wxPublishArticles', // 发布文章 传播趋势图
+  wxUserInteraction: '/wxUserInteraction', // 用户互动 传播趋势图
+  wbPublishArticles: '/wbPublishArticles', // 发布文章 传播趋势图
+  wbUserInteraction: '/wbUserInteraction', // 用户互动 传播趋势图
+  wxReproducedByOfficialTop10: '/wxReproducedByOfficialTop10', // 被公众号转载Top10
+  communicationPowerRanking: '/communicationPowerRanking', // 传播力排行榜
+  wechatCommunicationForceScore: '/wechatCommunicationForceScore', // 微信传播力分数
+  weiboCommunicationForceScore: '/weiboCommunicationForceScore' // 微博传播力分数
 }

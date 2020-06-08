@@ -4,8 +4,7 @@
       <p class="title">
         文章传播排行
       </p>
-      <div class="release-box"
-           id="release-num"></div>
+      <div class="release-box" id="release-num"></div>
     </div>
   </div>
 </template>
@@ -26,329 +25,314 @@ export default {
   methods: {
     getRelease () {
       let monitorBar = echarts.init(document.getElementById('release-num'))
-      this.$http.get(this.$api.monthReadDifference)
+      this.$http
+        .get(this.$api.monthReadDifference)
         .then(res => {
-          // var data0 = {}
-
-          // var data1 = { data: [] }
-          // var data2 = { data: [] }
+          // console.log(res.data.data)
           // 排行数据
           var rankData = [
             {
-              'data': [
+              data: [
                 {
-                  'name': '微信',
-                  'value': 180.45
+                  name: '微信',
+                  value: 180.45
                 },
                 {
-                  'name': '微博',
-                  'value': 152.20
+                  name: '微博',
+                  value: 152.2
                 },
                 {
-                  'name': '头条',
-                  'value': 147.91
-                }]
+                  name: '头条',
+                  value: 147.91
+                }
+              ]
             },
             {
-              'data': [
+              data: [
                 {
-                  'name': '微信',
-                  'value': 197.67
+                  name: '微信',
+                  value: 197.67
                 },
 
                 {
-                  'name': '微博',
-                  'value': 165.53
+                  name: '微博',
+                  value: 165.53
                 },
 
                 {
-                  'name': '头条',
-                  'value': 147.91
+                  name: '头条',
+                  value: 147.91
                 },
 
                 {
-                  'name': '抖音',
-                  'value': 107.92
-                }]
-            },
-
-            {
-
-              'data': [
-                {
-                  'name': '微信',
-                  'value': 249.05
-                },
-
-                {
-                  'name': '微博',
-                  'value': 169.16
-                },
-
-                {
-                  'name': '头条',
-                  'value': 147.91
-                }]
+                  name: '抖音',
+                  value: 107.92
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 274.44
+                  name: '微信',
+                  value: 249.05
                 },
 
                 {
-                  'name': '微博',
-                  'value': 178.64
+                  name: '微博',
+                  value: 169.16
                 },
 
                 {
-                  'name': '头条',
-                  'value': 157.74
-                }]
+                  name: '头条',
+                  value: 147.91
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 284.08
+                  name: '微信',
+                  value: 274.44
                 },
 
                 {
-                  'name': '微博',
-                  'value': 185.26
+                  name: '微博',
+                  value: 178.64
                 },
 
                 {
-                  'name': '头条',
-                  'value': 180.40
-                }]
+                  name: '头条',
+                  value: 157.74
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 297.14
-                },
-                {
-                  'name': '微博',
-                  'value': 202.22
+                  name: '微信',
+                  value: 284.08
                 },
 
                 {
-                  'name': '头条',
-                  'value': 188.48
-                } ]
+                  name: '微博',
+                  value: 185.26
+                },
+
+                {
+                  name: '头条',
+                  value: 180.4
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 313.22
+                  name: '微信',
+                  value: 297.14
+                },
+                {
+                  name: '微博',
+                  value: 202.22
                 },
 
                 {
-                  'name': '微博',
-                  'value': 202.35
-                },
-
-                {
-                  'name': '头条',
-                  'value': 191.12
-                } ]
+                  name: '头条',
+                  value: 188.48
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 315.30
+                  name: '微信',
+                  value: 313.22
                 },
 
                 {
-                  'name': '微博',
-                  'value': 202.35
+                  name: '微博',
+                  value: 202.35
                 },
 
                 {
-                  'name': '头条',
-                  'value': 191.12
-                }]
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 315.30
+                  name: '微信',
+                  value: 315.3
                 },
 
                 {
-                  'name': '微博',
-                  'value': 202.35
+                  name: '微博',
+                  value: 202.35
                 },
 
                 {
-                  'name': '头条',
-                  'value': 191.12
-                }]
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 315.30
+                  name: '微信',
+                  value: 315.3
                 },
 
                 {
-                  'name': '微博',
-                  'value': 202.35
+                  name: '微博',
+                  value: 202.35
                 },
 
                 {
-                  'name': '头条',
-                  'value': 191.12
-                }]
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 315.30
-                },
-                {
-                  'name': '微博',
-                  'value': 202.35
+                  name: '微信',
+                  value: 315.3
                 },
 
                 {
-                  'name': '头条',
-                  'value': 191.12
-                }]
+                  name: '微博',
+                  value: 202.35
+                },
+
+                {
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 315.30
+                  name: '微信',
+                  value: 315.3
+                },
+                {
+                  name: '微博',
+                  value: 202.35
                 },
 
                 {
-                  'name': '微博',
-                  'value': 202.35
-                },
-
-                {
-                  'name': '头条',
-                  'value': 191.12
-                }]
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 322.49
-                },
-                {
-                  'name': '微博',
-                  'value': 202.35
+                  name: '微信',
+                  value: 315.3
                 },
 
                 {
-                  'name': '头条',
-                  'value': 191.12
-                }]
+                  name: '微博',
+                  value: 202.35
+                },
+
+                {
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 550
+                  name: '微信',
+                  value: 322.49
+                },
+                {
+                  name: '微博',
+                  value: 202.35
                 },
 
                 {
-                  'name': '微博',
-                  'value': 480
-                },
-
-                {
-                  'name': '头条',
-                  'value': 420
-                }]
+                  name: '头条',
+                  value: 191.12
+                }
+              ]
             },
 
             {
-              'category': '2019-05-19',
-              'data': [
-
+              data: [
                 {
-                  'name': '微信',
-                  'value': 600
-                },
-                {
-                  'name': '微博',
-                  'value': 550
+                  name: '微信',
+                  value: 550
                 },
 
                 {
-                  'name': '头条',
-                  'value': 450
-                }]
+                  name: '微博',
+                  value: 480
+                },
+
+                {
+                  name: '头条',
+                  value: 420
+                }
+              ]
             },
 
             {
-              'data': [
-
+              category: '2019-05-19',
+              data: [
                 {
-                  'name': '微信',
-                  'value': 666
+                  name: '微信',
+                  value: 600
                 },
                 {
-                  'name': '微博',
-                  'value': 555
+                  name: '微博',
+                  value: 550
                 },
 
                 {
-                  'name': '头条',
-                  'value': 485
-                }]
+                  name: '头条',
+                  value: 450
+                }
+              ]
+            },
+
+            {
+              data: [
+                {
+                  name: '微信',
+                  value: 666
+                },
+                {
+                  name: '微博',
+                  value: 555
+                },
+
+                {
+                  name: '头条',
+                  value: 485
+                }
+              ]
             }
-
           ]
-          res.data.data[0].data.forEach((item) => {
-            let asdasd = {}
-            for (let i = 0; i < 30; i++) {
-              asdasd.name = item.name
-              asdasd.value = parseInt(item.value / 30) + parseInt(item.value / 30) * i
-            }
-          })
-          // res.data.data[1].data.forEach(item => {
-          //   console.log(item)
-          // })
-          // res.data.data[2].data.forEach(item => {
-          //   console.log(item)
-          // })
           var wxImg = new Image()
           var wbImg = new Image()
           var ydImg = new Image()
@@ -432,13 +416,15 @@ export default {
                   return ele.date
                 })
               },
-              grid: [{
-                left: '8%',
-                right: '5%',
-                top: '10%',
-                height: 'auto',
-                bottom: '10%'
-              }],
+              grid: [
+                {
+                  left: '8%',
+                  right: '5%',
+                  top: '10%',
+                  height: 'auto',
+                  bottom: '10%'
+                }
+              ],
               xAxis: [{}],
               yAxis: [{}],
               series: [
@@ -541,40 +527,46 @@ export default {
           }
           for (var i = 0; i < 16; i++) {
             option.options.push({
-              xAxis: [{
-                type: 'category',
-                show: true,
-                // max: xMax,
-                axisLabel: {
-                  textStyle: {
-                    color: 'rgba(255,255,255,0.9)',
-                    fontFamily: 'Microsoft YaHei'
-                  }
-                },
-                data: rankData[i].data.map(function (ele) {
-                  return ele.name
-                }).reverse()
-              }],
-              yAxis: [{
-                type: 'value',
-                axisTick: {
-                  show: false
-                },
-                axisLine: {
+              xAxis: [
+                {
+                  type: 'category',
                   show: true,
-                  lineStyle: {
-                    color: 'rgba(121,121,121,0.3)'
-                  }
-                },
-                axisLabel: {
-                  // interval: 0,
-                  // rotate: 40,
-                  textStyle: {
-                    color: 'rgba(255,255,255,0.9)',
-                    fontFamily: 'Microsoft YaHei'
+                  // max: xMax,
+                  axisLabel: {
+                    textStyle: {
+                      color: 'rgba(255,255,255,0.9)',
+                      fontFamily: 'Microsoft YaHei'
+                    }
+                  },
+                  data: rankData[i].data
+                    .map(function (ele) {
+                      return ele.name
+                    })
+                    .reverse()
+                }
+              ],
+              yAxis: [
+                {
+                  type: 'value',
+                  axisTick: {
+                    show: false
+                  },
+                  axisLine: {
+                    show: true,
+                    lineStyle: {
+                      color: 'rgba(121,121,121,0.3)'
+                    }
+                  },
+                  axisLabel: {
+                    // interval: 0,
+                    // rotate: 40,
+                    textStyle: {
+                      color: 'rgba(255,255,255,0.9)',
+                      fontFamily: 'Microsoft YaHei'
+                    }
                   }
                 }
-              }],
+              ],
               series: [
                 {
                   id: '30',
@@ -603,11 +595,13 @@ export default {
                       }
                     }
                   },
-                  data: rankData[i].data.map(function (ele) {
-                    return ele.value
-                  }).sort(function (a, b) {
-                    return a > b
-                  })
+                  data: rankData[i].data
+                    .map(function (ele) {
+                      return ele.value
+                    })
+                    .sort(function (a, b) {
+                      return a > b
+                    })
                 },
                 {
                   id: '60',
@@ -636,11 +630,13 @@ export default {
                       }
                     }
                   },
-                  data: rankData[i].data.map(function (ele) {
-                    return ele.value
-                  }).sort(function (a, b) {
-                    return a > b
-                  })
+                  data: rankData[i].data
+                    .map(function (ele) {
+                      return ele.value
+                    })
+                    .sort(function (a, b) {
+                      return a > b
+                    })
                 },
                 {
                   id: '90',
@@ -669,26 +665,218 @@ export default {
                       }
                     }
                   },
-                  data: rankData[i].data.map(function (ele) {
-                    return ele.value
-                  }).sort(function (a, b) {
-                    return a > b
-                  })
+                  data: rankData[i].data
+                    .map(function (ele) {
+                      return ele.value
+                    })
+                    .sort(function (a, b) {
+                      return a > b
+                    })
                 }
               ]
             })
           }
+          option = {
+            tooltip: {
+              show: true,
+              trigger: 'axis',
+
+              axisPointer: {
+                // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              }
+            },
+            legend: {
+              data: ['趋势', 'Thirty', 'Sixty', 'Ninety'],
+              top: '5%',
+              center: 'center',
+              textStyle: {
+                color: 'rgba(250,250,250,0.6)',
+                fontSize: 16
+              }
+            },
+            grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+            },
+            xAxis: [
+              {
+                type: 'category',
+                data: ['微信', '微博', '头条'],
+                axisLine: {
+                  show: true, // 隐藏X轴轴线
+                  lineStyle: {
+                    color: '#26D9FF',
+                    width: 2
+                  }
+                },
+                axisTick: {
+                  show: true // 隐藏X轴刻度
+                },
+                axisLabel: {
+                  show: true,
+                  textStyle: {
+                    color: 'rgba(250,250,250,0.6)', // X轴文字颜色
+                    fontSize: 16
+                  }
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: 'value',
+                /* name: "亿元", */
+                nameTextStyle: {
+                  color: '#ebf8ac',
+                  fontSize: 16
+                },
+                splitLine: {
+                  show: false
+                },
+                axisTick: {
+                  show: true
+                },
+                axisLine: {
+                  show: true,
+                  lineStyle: {
+                    color: '#26D9FF',
+                    width: 2
+                  }
+                },
+                axisLabel: {
+                  show: true,
+                  textStyle: {
+                    color: 'rgba(250,250,250,0.6)',
+                    fontSize: 16
+                  }
+                }
+              },
+              {
+                type: 'value',
+                show: false
+              }
+            ],
+            series: [
+              {
+                name: '趋势',
+                type: 'line',
+                yAxisIndex: 0, // 使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
+                smooth: true, // 平滑曲线显示
+                showAllSymbol: true, // 显示所有图形。
+                symbol: 'circle', // 标记的图形为实心圆
+                symbolSize: 8, // 标记的大小
+                itemStyle: {
+                  // 折线拐点标志的样式
+                  color: '#1045A0',
+                  borderColor: '#3D7EEB',
+                  width: 2,
+                  shadowColor: '#3D7EEB',
+                  shadowBlur: 4
+                },
+                lineStyle: {
+                  color: '#3D7EEB',
+                  width: 2,
+                  shadowColor: '#3D7EEB',
+                  shadowBlur: 4
+                },
+                areaStyle: {
+                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    {
+                      offset: 0,
+                      color: 'rgba(61,126,235, 0.5)'
+                    },
+                    {
+                      offset: 1,
+                      color: 'rgba(61,126,235, 0)'
+                    }
+                  ])
+                },
+                data: res.data.data[0].data
+              },
+              {
+                name: 'Thirty',
+                type: 'bar',
+                barWidth: 15,
+                itemStyle: {
+                  normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      {
+                        offset: 0,
+                        color: 'rgba(61,126,235, 1)'
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgba(61,126,235, 0)'
+                      }
+                    ]),
+                    borderColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: 'rgba(160,196,225, 1)' }, { offset: 1, color: 'rgba(61,126,235, 1)' }
+                    ]),
+                    borderWidth: 2
+                  }
+                },
+                data: res.data.data[0].data
+              },
+              {
+                name: 'Sixty',
+                type: 'bar',
+                barWidth: 15,
+                itemStyle: {
+                  normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: 'rgba(15,197,243,1)' },
+                      { offset: 1, color: 'rgba(15,197,243,0)' }
+                    ]),
+                    borderColor: new echarts.graphic.LinearGradient(
+                      0,
+                      0,
+                      0,
+                      1,
+                      [
+                        { offset: 0, color: 'rgba(180,240,255,1)' },
+                        { offset: 1, color: 'rgba(15,197,243,1)' }
+                      ]
+                    ),
+                    borderWidth: 2
+                  }
+                },
+                data: res.data.data[1].data
+              },
+              {
+                name: 'Ninety',
+                type: 'bar',
+                barWidth: 15,
+                itemStyle: {
+                  normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      {
+                        offset: 0,
+                        color: 'rgba(160,126,235, 1)'
+                      },
+                      {
+                        offset: 1,
+                        color: 'rgba(160,126,235, 0)'
+                      }
+                    ]),
+                    borderColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: 'rgba(160,196,225, 1)' }, { offset: 1, color: 'rgba(61,126,160, 1)' }
+                    ]),
+                    borderWidth: 2
+                  }
+                },
+                data: res.data.data[2].data
+              }
+            ]
+          }
           monitorBar.setOption(option, true)
-          this.timer = setInterval(() => {
-            monitorBar.setOption(option, true)
-          }, 10000)
           window.addEventListener('resize', function () {
             monitorBar.resize()
           })
           this.lineChart = monitorBar
         })
-        .catch(() => {
-        })
+        .catch(() => {})
     }
   },
   mounted () {
@@ -722,7 +910,7 @@ export default {
   line-height: 5rem;
 }
 .area-rank .title::after {
-  content: '';
+  content: "";
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -733,7 +921,7 @@ export default {
   transform: rotate(45deg);
 }
 .area-rank .title::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -746,10 +934,10 @@ export default {
 .release-box {
   overflow: hidden;
   height: 80%;
-  background: url('../../../assets/images/articleBg-All.png') no-repeat bottom
+  background: url("../../../assets/images/articleBg-All.png") no-repeat bottom
     center;
   background-size: 100% 99%;
   box-sizing: border-box;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9)
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9);
 }
 </style>

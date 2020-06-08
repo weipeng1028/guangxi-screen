@@ -30,6 +30,21 @@
             <p>优秀文章展示</p>
           </div>
           <div class="content">
+            <el-carousel  direction="vertical" :autoplay="true" indicator-position="none">
+              <el-carousel-item v-for="(item, index) in articleData" :key="index">
+                <div class="article-cont">
+                  <div class="article-title" v-html="item.title">
+                  </div>
+                  <div>
+                    <img ref="banner" @click="findArticle(item, index)"
+                 :src="item.cover"
+                 class="bannerImg">
+                  {{item.content}}
+                  </div>
+
+                </div>
+              </el-carousel-item>
+            </el-carousel>
           </div>
         </div>
       </div>
@@ -56,34 +71,6 @@ export default {
   data () {
     return {
       showShadow: false,
-      // bannerH: 200,
-      // swiperOption: {
-      //   debugger: true,
-      //   // 显示分页
-      //   pagination: {
-      //     el: '.swiper-pagination'
-      //   },
-      //   // 设置点击箭头
-      //   navigation: {
-      //     nextEl: '.swiper-button-next',
-      //     prevEl: '.swiper-button-prev'
-      //   },
-      //   // 自动轮播
-      //   autoplay: {
-      //     delay: 2000,
-      //     // 当用户滑动图片后继续自动轮播
-      //     disableOnInteraction: false
-      //   },
-      //   // 同时展示个数
-      //   slidesPerView: 1,
-      //   spaceBetween: 15,
-      //   // 滑动方向
-      //   direction: 'horizontal',
-      //   // 小手掌抓取滑动
-      //   grabCursor: true,
-      //   // 开启循环模式
-      //   loop: true
-      // },
       videoData: {
         url: 'http://vjs.zencdn.net/v/oceans.mp4',
         cover_url: require('@/assets/images/text/401147252.png')
@@ -289,14 +276,26 @@ export default {
     -webkit-transform: translateX(300%);
   }
 }
-/* @-webkit-keyframes wordsLoop {
-  0% {
-    transform: translateX(100%);
-    -webkit-transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-  }
-} */
+.article-cont{
+  height: 100%;
+  overflow: hidden;
+  padding:1.25rem;
+  word-break: break-all;
+  font-size: 1.25rem;
+  text-indent: 2rem;
+  line-height: 1.8rem;
+  box-sizing: border-box;
+  color: #fff;
+}
+.article-cont .bannerImg{
+  width: 25%;
+  height: 25%;
+  float:left;
+  margin: 0 .625rem .625rem 0;
+}
+.article-title{
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.5;
+}
 </style>
