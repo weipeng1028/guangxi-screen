@@ -165,7 +165,7 @@ export default {
   background-size: 100% 100%;
   width: 80%;
   height: 100%;
-  font-size: 4rem;
+  font-size: 0.8rem;
   box-sizing: border-box;
   display: flex;
   align-items: center; /*定义body的元素垂直居中*/
@@ -174,12 +174,12 @@ export default {
 
 .top-box .name {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   text-align: center;
 }
 .top-box .num {
   color: #00ceff;
-  font-size: 3rem;
+  font-size: 0.66rem;
   text-align: center;
 }
 .area-article {
@@ -187,7 +187,7 @@ export default {
 }
 .title-tabs {
   height: 20%;
-  line-height: 5rem;
+  line-height: 1.11rem;
   display: flex;
   justify-content: space-around;
 }
@@ -198,13 +198,13 @@ export default {
   text-align: center;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   /* border: 1px solid #00ceff;
   box-shadow:  0 2px 12px 0 #00ceff;
   background-color: rgba($color: #fff, $alpha: 0.1) */
 }
 .title-tabs span img {
-  height: 2rem;
+  height: 0.44rem;
   vertical-align: middle;
   margin-right: 5px;
 }
@@ -228,38 +228,38 @@ export default {
 .article-top {
   box-sizing: border-box;
   display: flex;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   justify-content: space-between;
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
   color: #fff;
-  line-height: 4rem;
+  line-height: 0.8rem;
   /* background-color: rgba(79, 41, 248,0.3); */
 }
 .tubiao-size {
-  height: calc(100% - 4rem);
+  height: calc(100% - 0.8rem);
   margin: 0 auto;
   overflow: hidden;
 }
 .new-list {
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   padding: 0 5px;
-  line-height: 4rem;
+  line-height: 0.8rem;
   color: #fff;
   transition: top 0.5s;
 }
 .anim {
   transition: all 0.5s;
-  margin-top: -4rem;
+  margin-top: -0.8rem;
   /* 高度等于行高 */
 }
 .show-article {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-  height: 4rem;
-  line-height: 4rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
 }
 </style>

@@ -1,35 +1,31 @@
 <template lang="html">
   <div class="dashboard">
-    <!-- <div class="screen-title">
-      <div class="screen-bg">
-        新媒体大屏统计分析
-      </div>
-    </div> -->
     <div class="flex-container column">
-        <div class="item one" @click="clickChart('1')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
-          <multipleColumn></multipleColumn>
+        <div class="item one" @click="clickChart('1')" v-on:dblclick="dbclickChart('1')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
+           <v-line :message="backShow"></v-line>
         </div>
-        <div class="item two" @click="clickChart('2')" style="transform: translate(-32.4%,0.5%) scale(0.33)">
-          <column></column>
+        <div class="item two" @click="clickChart('2')" v-on:dblclick="dbclickChart('2')" style="transform: translate(-32.4%,0.5%) scale(0.33)">
+            <multipleColumn :message="backShow"></multipleColumn>
         </div>
-        <div class="item three" @click="clickChart('3')" style="transform: translate(-32.4%,34.5%) scale(0.33)">
-          <v-line></v-line>
+        <div class="item three" @click="clickChart('3')" v-on:dblclick="dbclickChart('3')" style="transform: translate(-32.4%,34.5%) scale(0.33)">
+          <v-iframe :message="backShow"></v-iframe>
         </div>
-        <div class="item four  active" @click="clickChart('4')" style="transform: translate(30.7%, 0) scale(1)">
-          <!-- <point></point> -->
-          <div>123321</div>
+        <div class="item four  active" @click="clickChart('4')" v-on:dblclick="dbclickChart('4')" style="transform: translate(30.7%, 0) scale(1)">
+          <column :message="backShow"></column>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import column from '@/views/components/column/column'
-import line from '@/views/components/line/line'
-import multipleColumn from '@/views/components/multipleColumn/multipleColumn'
+import column from '@/views/bigscreen/Screenbox'
+import line from '@/views/bigscreen/Analysis'
+import multipleColumn from '@/views/bigscreen/Excellent'
+import iframe from '@/views/bigscreen/Iframe'
 export default {
   data () {
     return {
+      backShow: true,
       items: []
     }
   },
@@ -58,6 +54,25 @@ export default {
       activeItem.classList.remove('active')
       clickItem.classList.add('active')
       this.atSetStyle(clickItem, activeItem)
+      if (clickIndex === '1') {
+        this.key += 1
+      }
+    },
+    dbclickChart (index) {
+      switch (index) {
+        case '1':
+          this.$router.push({ name: 'Analysis' })
+          break
+        case '2':
+          this.$router.push({ name: 'Excellent' })
+          break
+        case '3':
+          this.$router.push({ name: 'Iframe' })
+          break
+        case '4':
+          this.$router.push({ name: 'Bigscreen' })
+          break
+      }
     },
     atSetStyle (el1, el2) {
       let transform1 = el1.style.transform
@@ -69,7 +84,7 @@ export default {
   components: {
     column,
     multipleColumn,
-    // point,
+    'v-iframe': iframe,
     'v-line': line
   }
 }
@@ -98,6 +113,7 @@ export default {
   text-align: center;
   transition: all 0.8s;
   background: rgba(32, 32, 35, 0.5);
+  cursor: pointer;
 }
 .dashboard {
   position: relative;
@@ -135,5 +151,9 @@ export default {
   width: 76%;
   margin-left: 10px;
   line-height: 300px;
+}
+.show-box{
+  width: 100%;
+  height: 100%;
 }
 </style>

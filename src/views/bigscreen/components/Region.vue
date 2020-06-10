@@ -33,12 +33,12 @@
            class="article-content region-rank"
            v-if="areaRank">
         <p class="article-top">
-          <span style="width:9%;text-align: left;">排名</span>
+          <span style="width:10%;text-align:left;">排名</span>
           <span class="list-name">单位名称</span>
-          <span style="width:10%;text-align: left;">微信</span>
-          <span style="width:13%;text-align: left;">微博</span>
-          <span style="width:13%;text-align: left;">头条</span>
-          <span style="width:13%;text-align: left;">总分</span>
+          <span style="width:12%;text-align: center;">微信</span>
+          <span style="width:12%;text-align: center;">微博</span>
+          <span style="width:12%;text-align: center;">头条</span>
+          <span style="width:12%;text-align: center;">总分</span>
         </p>
         <div id="area-article"
              class="tubiao-size">
@@ -49,12 +49,12 @@
             <li v-for="(item,index) in att"
                 :key="index"
                 class="show-article">
-              <span style="width:9%;text-align: left;">{{item.num}}</span>
+              <span style="width:10%;text-align: left;">{{item.num}}</span>
               <span class="list-name">{{item.name}}</span>
-              <span style="width:10%;text-align: center;">{{item.wx}}</span>
-              <span style="width:13%;text-align: center;">{{item.wb}}</span>
-              <span style="width:13%;text-align: center;">{{item.tt}}</span>
-              <span style="width:13%;text-align: left;">{{item.total}}</span>
+              <span style="width:12%;text-align: center;">{{item.wx}}</span>
+              <span style="width:12%;text-align: center;">{{item.wb}}</span>
+              <span style="width:12%;text-align: center;">{{item.tt}}</span>
+              <span style="width:12%;text-align: center;">{{item.total}}</span>
             </li>
           </ul>
         </div>
@@ -220,7 +220,7 @@ export default {
   background-size: 100% 100%;
   width: 45%;
   height: 100%;
-  font-size: 4rem;
+  font-size: 0.8rem;
   box-sizing: border-box;
   display: flex;
   align-items: center; /*定义body的元素垂直居中*/
@@ -229,12 +229,12 @@ export default {
 
 .top-box .name {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   text-align: center;
 }
 .top-box .num {
   color: #00ceff;
-  font-size: 3rem;
+  font-size: 0.66rem;
   text-align: center;
 }
 .district,
@@ -263,17 +263,17 @@ export default {
   display: flex;
   align-items: center;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   text-align: center;
   height: 20%;
-  line-height: 5rem;
+  line-height: 1.11rem;
 }
 .area-rank .title {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   text-align: center;
   height: 20%;
-  line-height: 5rem;
+  line-height: 1.11rem;
 }
 .area-rank .title::after {
   content: '';
@@ -306,15 +306,15 @@ export default {
 .article-top {
   box-sizing: border-box;
   display: flex;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   justify-content: space-between;
   width: 100%;
-  height: 4rem;
+  height: 0.8rem;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
   color: #fff;
-  line-height: 4rem;
+  line-height: 0.8rem;
 }
 .article-content {
   overflow: hidden;
@@ -325,28 +325,28 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9)
 }
 .tubiao-size {
-  height: calc(100% - 4rem);
+  height: calc(100% - 0.8rem);
   margin: 0 auto;
   overflow: hidden;
 }
 .new-list {
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   padding: 0 5px;
-  line-height: 4rem;
+  line-height: 0.8rem;
   color: #fff;
   transition: top 0.5s;
 }
 .anim {
   transition: all 0.5s;
-  margin-top: -4rem;
+  margin-top: -0.8rem;
   /* 高度等于行高 */
 }
 .show-article {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-  height: 4rem;
-  line-height: 4rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
 }
 .company {
   display: inline-block;
@@ -356,5 +356,12 @@ export default {
   text-overflow: ellipsis;
   cursor: pointer;
   text-align: left;
+}
+.list-name{
+  display: inline-block;
+  width: 48%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

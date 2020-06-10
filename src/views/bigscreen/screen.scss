@@ -1,9 +1,9 @@
 .region-type .el-radio__inner{
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 0.333rem;
+  height: 0.333rem;
 }
 .region-type .el-radio__label{
-  font-size: 1.5rem;
+  font-size: 0.333rem;
   color: #1beafc;
 }
 .content .el-carousel .el-carousel__container{
@@ -13,4 +13,8 @@
 }
 .power-ranking .canvas{
   display: none;
+}
+#line-tab div:first-of-type{
+  border: 1px solid #000;
+  width: 100% !important;
 }

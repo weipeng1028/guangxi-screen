@@ -4,6 +4,9 @@
       <div class="screen-bg">
         新媒体优秀作品展示
       </div>
+      <div class="back-hone" v-if="!this.message" @click="backHome">
+        返回
+      </div>
     </div>
     <div class="data-content">
       <div class="top">
@@ -11,18 +14,20 @@
           <div class="title-border">
             <p>优秀视频展示</p>
           </div>
-          <div class="content"
-               @mouseenter="EnterCont"
-               @mouseleave="LeaveCont">
-            <p class="video-title"
-               v-if="this.showShadow">视频名称</p>
-            <el-carousel trigger="click" :autoplay="false" indicator-position="none">
-              <el-carousel-item v-for="item in 4" :key="item">
-                <video controls="controls" :poster="videoData.cover_url">
-                    <source :src="videoData.url" type="video/mp4">
-                </video>
-              </el-carousel-item>
-            </el-carousel>
+          <div class="video-content">
+            <div class="swiper-container">
+              <div class="swiper-wrapper" @mouseenter="stopSwiper" @mouseleave="restSwiper">
+
+                <div class="swiper-slide slide_item" v-for="(item,i) in images" :key="i">
+                  <div class="img-box">
+                    <img :src="item.coverUrl" />
+                  </div>
+                  <img :src="require('@/assets/images/text/autoPlay.png')"
+                            @click="routerWeb(item)"
+                            class="center-img">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="top-right content-box">
@@ -30,18 +35,17 @@
             <p>优秀文章展示</p>
           </div>
           <div class="content">
-            <el-carousel  direction="vertical" :autoplay="true" indicator-position="none">
+            <el-carousel  direction="vertical" :interval="5000" :autoplay="true" indicator-position="none">
               <el-carousel-item v-for="(item, index) in articleData" :key="index">
                 <div class="article-cont">
                   <div class="article-title" v-html="item.title">
                   </div>
-                  <div>
+                  <div class="article-text">
                     <img ref="banner" @click="findArticle(item, index)"
-                 :src="item.cover"
-                 class="bannerImg">
-                  {{item.content}}
+                    :src="item.cover"
+                    class="bannerImg">
+                      {{item.content}}
                   </div>
-
                 </div>
               </el-carousel-item>
             </el-carousel>
@@ -67,31 +71,72 @@
   </div>
 </template>
 <script>
+import Swiper from 'swiper'
+import 'swiper/dist/css/swiper.min.css'
 export default {
+  props: ['message'],
   data () {
     return {
-      showShadow: false,
+      animateRank: false,
+      intNumRank: undefined,
       videoData: {
         url: 'http://vjs.zencdn.net/v/oceans.mp4',
         cover_url: require('@/assets/images/text/401147252.png')
       },
+      images: [],
       articleData: [],
-      bannerImgLst: []
+      bannerImgLst: [],
+      mySwiper: {}
     }
   },
+  mounted () {
+    this.startSwiper()
+  },
   methods: {
-    EnterCont () {
-      this.showShadow = true
+    backHome () {
+      this.$router.push({ name: 'dashboard' })
     },
-    LeaveCont () {
-      this.showShadow = false
+    stopSwiper () {
+      this.mySwiper.stopAutoplay()
+    },
+    restSwiper () {
+      this.mySwiper.startAutoplay()
+    },
+    startSwiper () {
+      this.mySwiper = new Swiper('.swiper-container', {
+        initialSlide: 0,
+        loop: true,
+        speed: 2000,
+        slidesPerView: 3,
+        spaceBetween: 0,
+        observer: true,
+        observeParents: true,
+        paginationClickable: true,
+        grabCursor: true, // 设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。
+        autoplay: {
+          delay: 5000, // 自动切换延时
+          stopOnLastSlide: false, // 如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
+          disableOnInteraction: false // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
+        },
+        keyboard: true, // 键盘切换
+        // 如果需要分页器
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true // 此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
+        },
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      })
     },
     // 获取优秀视频
     getVideo () {
       this.$http.get(this.$api.displayExcellentWorks)
         .then(res => {
           if (res.data.data) {
-            // console.log(res.data.data)
+            this.images = res.data.data
           }
         })
         .catch(() => {
@@ -103,27 +148,24 @@ export default {
         .then(res => {
           if (res.data.data) {
             this.articleData = res.data.data
+            this.articleData.forEach(item => {
+              if (item.content.length > 450) {
+                item.content = item.content.substring(0, 450) + '...'
+              }
+            })
           }
         })
         .catch(() => {
         })
     },
     findArticle (item, index) {
-      console.log(item)
+      window.open(item.url, '_blank')
+    },
+    // 点击跳转
+    routerWeb (item) {
+      // window.location.href = item.video_url
+      window.open(item.videoUrl, '_blank')
     }
-    // 动态设置轮播图高度
-    // setBannerH () {
-    //   this.bannerH = this.$refs.element.offsetHeight
-    //    this.$refs.banner.forEach(item => {
-    //      item.style.height = this.bannerH + 'px'
-    //      item.style.width = '100%'
-    //    })
-    //   console.log(this.$refs.bannerbox)
-    //   this.$refs.bannerbox.forEach(item => {
-    //      item.style.height = this.bannerH + 'px'
-    //      item.style.width = '50%'
-    //    })
-    // }
   },
   created () {
     var oMeta = document.createElement('meta')
@@ -133,12 +175,6 @@ export default {
     this.getVideo()
     this.getArticle()
   }
-  // mounted () {
-  //   this.setBannerH()
-  //   window.addEventListener('resize', () => {
-  //     this.setBannerH()
-  //   }, false)
-  // }
 }
 </script>
 <style lang="scss">
@@ -156,22 +192,22 @@ export default {
 }
 .screen-title {
   display: block;
-  height: 8rem;
+  height: 1.8rem;
   margin: 0 auto;
 }
 .screen-bg{
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
-  background-size: 100% 100;
+  background-size: 50% 2rem;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   text-align: center;
-  line-height: 9rem;
+  line-height: 2rem;
   color: #fff;
-  font-size: 4rem;
+  font-size: 0.9rem;
 }
 .data-content {
   width: 100%;
-  height: calc(100vh - 8rem);
+  height: calc(100vh - 1.8rem);
   padding: 0 20px 20px 20px;
   box-sizing: border-box;
 }
@@ -185,30 +221,35 @@ export default {
 }
 .title-border {
   display: block;
-  height: 4rem;
+  height: 0.8rem;
   margin: 0 auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.22rem;
 }
 .title-border p {
   display: block;
   background: url(../../assets/images/title-border.png) center top no-repeat;
-  background-size: 20rem 4rem;
+  background-size: 4.44rem 0.8rem;
   text-align: center;
-  line-height: 4rem;
+  line-height: 0.8rem;
   color: #fff;
-  font-size: 2rem;
+  font-size: 0.44rem;
 }
 .content {
   width: 100%;
-  height: calc(100% - 5rem);
+  height: calc(100% - 1.11rem);
   display: block;
   background: url(../../assets/images/articleBg-All.png) center top no-repeat;
   background-size: 100% 100%;
   overflow: hidden;
   position: relative;
 }
+.content-carousel{
+  width: 66%;
+}
 .content .el-carousel{
   height: 100%;
+
+  margin: 0 auto;
 }
 .content video {
   width: 98%;
@@ -218,8 +259,8 @@ export default {
   outline: none;
 }
 .video-title {
-  font-size: 1.5rem;
-  line-height: 5rem;
+  font-size: 0.33rem;
+  line-height: 1.11rem;
   color: #fff;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.6);
@@ -229,7 +270,7 @@ export default {
   z-index: 9999;
 }
 .swiper-box {
-  height: calc(100% - 6rem);
+  height: calc(100% - 1.33rem);
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -241,13 +282,13 @@ export default {
   height: 50%;
 }
 .bottom .title-border {
-  margin-top: 1rem;
+  margin-top: 0.22rem;
 }
 .bannerbox {
   min-width: 25%;
   height: 100%;
   margin-right: 10px;
-  animation: 35s wordsLoop linear infinite normal;
+  animation: 50s wordsLoop linear infinite normal;
 }
 .bannerImg{
   width: 100%;
@@ -279,11 +320,11 @@ export default {
 .article-cont{
   height: 100%;
   overflow: hidden;
-  padding:1.25rem;
+  padding:0.28rem;
   word-break: break-all;
-  font-size: 1.25rem;
-  text-indent: 2rem;
-  line-height: 1.8rem;
+  font-size: 0.28rem;
+  text-indent: 0.44rem;
+  line-height: 0.375rem;
   box-sizing: border-box;
   color: #fff;
 }
@@ -291,11 +332,58 @@ export default {
   width: 25%;
   height: 25%;
   float:left;
-  margin: 0 .625rem .625rem 0;
+  margin: 0 0.14rem 0.14rem 0;
 }
 .article-title{
   text-align: center;
-  font-size: 2rem;
+  font-size: 0.444rem;
   line-height: 1.5;
+  margin-bottom: 0.05rem;
+}
+.article-text{
+  font-size: 0.33rem;
+  letter-spacing: 0.05rem;
+}
+/**视频 */
+.video-content{
+  width: 100%;
+  height: calc(100% - 1.11rem);
+  display: block;
+  background: url(../../assets/images/articleBg-All.png) center top no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 1%;
+  box-sizing: border-box;
+}
+.swiper-container{
+  height: 100%;
+}
+.swiper-slide{
+  height: 100%;
+}
+.swiper-slide .img-box{
+  height: 100%;
+  max-width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+.swiper-slide .img-box img{
+  width: 100%;
+  height: 100%;
+}
+.center-img{
+  width: 20%;
+  position: absolute;
+  left: 40%;
+  top: 40%;
+}
+.back-hone{
+  color: rgba(240, 16, 27, 0.74);
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  font-size: 0.5rem;
+  cursor: pointer;
 }
 </style>

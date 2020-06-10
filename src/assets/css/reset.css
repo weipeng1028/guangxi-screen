@@ -100,16 +100,12 @@ nav,
 section {
   display: block;
 }
-html {
-  font-size: 12px !important;
-}
 body {
   margin: 0 auto;
   padding: 0px;
   line-height: 1;
-  font-size: 80px;
-  font-family: 'HanHei SC', 'MicrosoftYaHei', 'PingFang SC', 'Helvetica Neue',
-  'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+  font-family: "HanHei SC", "MicrosoftYaHei", "PingFang SC", "Helvetica Neue",
+    "Helvetica", "STHeitiSC-Light", "Arial", sans-serif;
 }
 p {
   font-size: 14px;
@@ -130,7 +126,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 table {

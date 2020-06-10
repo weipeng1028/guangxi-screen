@@ -4,6 +4,9 @@
       <div class="screen-bg">
         新媒体大屏统计分析
       </div>
+      <div class="back-hone" v-if="!this.message" @click="backHome">
+        返回
+      </div>
     </div>
     <div class="data-content">
       <div class="con-left">
@@ -52,7 +55,7 @@
                 <p class="article-top">
                   <span class="new-company"
                         v-text="this.typeof"></span>
-                  <span style="width:13%;text-align: left;">阅读量</span>
+                  <span style="width:15%;text-align:center;">阅读量</span>
                 </p>
                 <div id="area-article"
                      class="tubiao-size">
@@ -66,7 +69,7 @@
                       <span @click="activeWeb(item)"
                             class="new-company"
                             v-html="item.title"></span>
-                      <span style="width:13%;text-align: center;">{{item.readNum}}</span>
+                      <span style="width:15%;text-align:center;">{{item.readNum}}</span>
                     </li>
                   </ul>
                 </div>
@@ -83,8 +86,6 @@
 </template>
 <script>
 import region from './components/Region.vue'
-// import newArticle from './components/Article.vue'
-// import hotArticle from './components/HotArticle.vue'
 import release from './components/Release.vue'
 import read from './components/Read.vue'
 import echarts from 'echarts/lib/echarts' // echarts
@@ -98,6 +99,7 @@ require('echarts/lib/chart/pie')
 require('echarts/lib/chart/line')
 require('echarts/lib/component/tooltip')
 export default {
+  props: ['message'],
   data () {
     return {
       regions: '河池市', // 地区文章参数
@@ -139,6 +141,17 @@ export default {
             }
           })
           let option = {
+            // 标题
+            title: {
+              text: '广西各地区数据统计',
+              x: 'center',
+              textStyle: {
+                // 设置主标题风格
+                color: '#1beafc', // 设置主标题字体颜色
+                // 字体大小
+                fontSize: 30
+              }
+            },
             tooltip: {
               show: true,
               backgroundColor: 'rgba(0,0,0,.8)',
@@ -146,22 +159,22 @@ export default {
                 color: '#00ceff',
                 decoration: 'none',
                 fontFamily: 'Verdana, sans-serif',
-                fontSize: 25,
+                fontSize: 30,
                 fontWeight: 'bold'
               },
               formatter: function (params, ticket, callback) {
                 if (params.data.wxRead) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '微信：' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan
+                      '<br/>' + '微信' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan
                 } else if (params.data.wbDianzan) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '微博：' + '<br/>' + '点赞数：' + params.data.wbDianzan + '<br/>' + '评论数：' + params.data.wbPinglun + '<br/>' + '转发数：' + params.data.wbZhuanfa
+                      '<br/>' + '微博' + '<br/>' + '点赞数：' + params.data.wbDianzan + '<br/>' + '评论数：' + params.data.wbPinglun + '<br/>' + '转发数：' + params.data.wbZhuanfa
                 } else if (params.data.jrttRead) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '今日头条：' + '<br/>' + '阅读数：' + params.data.jrttRead + '<br/>' + '评论数：' + params.data.jrttPinglun + '<br/>' + '转发数：' + params.data.jrttZhuanfa
+                      '<br/>' + '今日头条' + '<br/>' + '阅读数：' + params.data.jrttRead + '<br/>' + '评论数：' + params.data.jrttPinglun + '<br/>' + '转发数：' + params.data.jrttZhuanfa
                 } else if (params.data.dyDianzan) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '抖音：' + '<br/>' + '点赞数：' + params.data.dyDianzan + '<br/>' + '评论数：' + params.data.dyPinglun + '<br/>' + '转发数：' + params.data.dyZhuanfa
+                      '<br/>' + '抖音' + '<br/>' + '点赞数：' + params.data.dyDianzan + '<br/>' + '评论数：' + params.data.dyPinglun + '<br/>' + '转发数：' + params.data.dyZhuanfa
                 }
               }
             },
@@ -170,7 +183,8 @@ export default {
               max: Math.max.apply(null, maxValue),
               left: 40,
               textStyle: {
-                color: '#fff'
+                color: '#fff',
+                fontSize: 25
               },
               top: 'bottom',
               text: ['高', '低'],
@@ -185,8 +199,8 @@ export default {
               label: {
                 normal: {
                   show: true,
-                  fontSize: 20, // 文字大小
-                  color: '#fb6a00' // 文字颜色
+                  fontSize: 30, // 文字大小
+                  color: '#ff7200' // 文字颜色
                 },
                 emphasis: {
                   show: true,
@@ -468,11 +482,17 @@ export default {
         })
         .catch(() => {
         })
+    },
+    backHome () {
+      this.$router.push({ name: 'dashboard' })
     }
   },
   created () {
     this.getTotalPublish()
     this.getarticle() // 最新文章
+  },
+  destroyed () {
+    clearInterval(this.fhourTime)
   },
   mounted () {
     this.monitorMap()
@@ -497,22 +517,22 @@ export default {
 }
 .screen-title {
   display: block;
-  height: 8rem;
+  height: 1.8rem;
   margin: 0 auto;
 }
 .screen-bg{
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
-  background-size: 100% 100;
+  background-size: 50% 2rem;
   text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
   text-align: center;
-  line-height: 9rem;
+  line-height: 2rem;
   color: #fff;
-  font-size: 4rem;
+  font-size: 0.9rem;
 }
 .data-content {
   width: 100%;
-  height: calc(100vh - 8rem);
+  height: calc(100vh - 1.8rem);
   padding: 0 20px 20px 20px;
   box-sizing: border-box;
   display: flex;
@@ -567,7 +587,7 @@ export default {
   background-size: 100% 100%;
   width: 80%;
   height: 100%;
-  font-size: 4rem;
+  font-size: 0.9rem;
   box-sizing: border-box;
   display: flex;
   align-items: center; /*定义body的元素垂直居中*/
@@ -576,12 +596,12 @@ export default {
 
 .top-box .name {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   text-align: center;
 }
 .top-box .num {
   color: #00ceff;
-  font-size: 3rem;
+  font-size: 0.66rem;
   text-align: center;
 }
 .area-article {
@@ -589,21 +609,21 @@ export default {
 }
 .title-tabs {
   height: 20%;
-  line-height: 5rem;
+  line-height: 1.11rem;
   display: flex;
   justify-content: space-around;
 }
 .title-tabs span {
   display: inline-block;
-  width: 22%;
+  width: 24%;
   color: #fff;
   text-align: center;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
 }
 .title-tabs span img {
-  height: 2rem;
+  height: 0.44rem;
   vertical-align: middle;
   margin-right: 5px;
 }
@@ -626,48 +646,58 @@ export default {
 .article-top {
   box-sizing: border-box;
   display: flex;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   justify-content: space-between;
   width: 100%;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
   color: #fff;
-  line-height: 4rem;
+  line-height: 0.9rem;
   /* background-color: rgba(79, 41, 248,0.3); */
 }
 .tubiao-size {
-  height: calc(100% - 4rem);
+  height: calc(100% - 0.9rem);
   margin: 0 auto;
   overflow: hidden;
 }
 .new-list {
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   padding: 0 5px;
-  line-height: 4rem;
+  line-height: 0.9rem;
   color: #fff;
   transition: top 0.5s;
 }
 .anim {
   transition: all 0.5s;
-  margin-top: -4rem;
+  margin-top: -0.9rem;
   /* 高度等于行高 */
 }
 .show-article {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-  height: 4rem;
-  line-height: 4rem;
+  height: 0.9rem;
+  line-height: 0.9rem;
 }
 .new-company{
+  width: 85%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
+  text-align: left;
 }
 .release-box{
   width: 98%;
   height: 100%;
+}
+.back-hone{
+  color: rgba(240, 16, 27, 0.74);
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  font-size: 0.5rem;
+  cursor: pointer;
 }
 </style>

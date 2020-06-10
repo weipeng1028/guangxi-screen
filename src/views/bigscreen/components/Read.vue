@@ -54,13 +54,13 @@ export default {
                   color: '#fff',
                   fontStyle: 'normal',
                   fontFamily: '微软雅黑',
-                  fontSize: 12
+                  fontSize: 18
                 }
               },
               grid: {
                 left: '6%',
                 right: '5%',
-                bottom: '0',
+                bottom: '3%',
                 top: '15%',
                 // padding:'0 0 10 0',
                 containLabel: true
@@ -88,7 +88,7 @@ export default {
                   color: '#a8aab0',
                   fontStyle: 'normal',
                   fontFamily: '微软雅黑',
-                  fontSize: 12
+                  fontSize: 18
                 }
               },
               xAxis: [
@@ -102,9 +102,9 @@ export default {
                       color: '#fff',
                       fontStyle: 'normal',
                       fontFamily: '微软雅黑',
-                      fontSize: 12
+                      fontSize: 20
                     },
-                    rotate: 50
+                    rotate: 0
                   },
                   axisTick: {// 坐标轴刻度相关设置。
                     show: false
@@ -129,7 +129,7 @@ export default {
                       color: '#a8aab0',
                       fontStyle: 'normal',
                       fontFamily: '微软雅黑',
-                      fontSize: 12
+                      fontSize: 18
                     }
                   },
                   axisLine: {
@@ -170,13 +170,16 @@ export default {
                   itemStyle: {
                     normal: {
                       show: true,
-                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#03fb55'
-                      }, {
-                        offset: 1,
-                        color: '#03fb55'
-                      }]),
+                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        {
+                          offset: 0,
+                          color: 'rgba(12,255,0, 1)'
+                        },
+                        {
+                          offset: 1,
+                          color: 'rgba(12,255,0, 0)'
+                        }
+                      ]),
                       barBorderRadius: 50,
                       borderWidth: 0
                     }
@@ -203,13 +206,7 @@ export default {
                   itemStyle: {
                     normal: {
                       show: true,
-                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#69CBF2'
-                      }, {
-                        offset: 1,
-                        color: '#69CBF2'
-                      }]),
+                      color: '#ff000c',
                       barBorderRadius: 50,
                       borderWidth: 0
                     }
@@ -252,30 +249,10 @@ export default {
                   name: '头条',
                   type: 'line',
                   data: tt,
-                  barWidth: 10,
-                  barGap: 0, // 柱间距离
-                  // label: {//图形上的文本标签
-                  //     normal: {
-                  //       show: true,
-                  //       position: 'top',
-                  //       textStyle: {
-                  //           color: '#a8aab0',
-                  //           fontStyle: 'normal',
-                  //           fontFamily: '微软雅黑',
-                  //           fontSize: 12,
-                  //       },
-                  //     },
-                  // },
                   itemStyle: {
                     normal: {
                       show: true,
-                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#fffaa0'
-                      }, {
-                        offset: 1,
-                        color: '#fffaa0'
-                      }]),
+                      color: '#f6ff00',
                       barBorderRadius: 50,
                       borderWidth: 0
                     }
@@ -339,10 +316,10 @@ export default {
 }
 .area-rank .title {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 0.33rem;
   text-align: center;
   height: 20%;
-  line-height: 5rem;
+  line-height: 1.11rem;
 }
 .area-rank .title::after {
   content: '';

@@ -5,16 +5,16 @@ Vue.use(Router)
 let routes = [
   {
     path: '/',
+    name: 'dashboard',
+    component: () => import('@/views/components/dashboard/dashboard')
+  },
+  {
+    path: '/big',
     name: 'Bigscreen',
     meta: {
       title: '新媒体大屏统计分析'
     },
     component: () => import('@/views/bigscreen/Screenbox.vue')
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('@/views/components/dashboard/dashboard')
   },
   {
     path: '/excellent',
@@ -25,6 +25,11 @@ let routes = [
     path: '/analysis',
     name: 'Analysis',
     component: () => import('@/views/bigscreen/Analysis.vue')
+  },
+  {
+    path: '/iframe',
+    name: 'Iframe',
+    component: () => import('@/views/bigscreen/Iframe.vue')
   }
 ]
 const router = new Router({

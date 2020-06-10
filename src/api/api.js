@@ -27,6 +27,8 @@ export default {
   wbUserInteraction: '/wbUserInteraction', // 用户互动 传播趋势图
   wxReproducedByOfficialTop10: '/wxReproducedByOfficialTop10', // 被公众号转载Top10
   communicationPowerRanking: '/communicationPowerRanking', // 传播力排行榜
+  popularArticlesTop10: 'popularArticlesTop10', // 微博热门文章
   wechatCommunicationForceScore: '/wechatCommunicationForceScore', // 微信传播力分数
-  weiboCommunicationForceScore: '/weiboCommunicationForceScore' // 微博传播力分数
+  weiboCommunicationForceScore: '/weiboCommunicationForceScore', // 微博传播力分数
+  PropagationPath: 'bigscreenPopularArticlesPropagationPath' // 微博路径
 }
