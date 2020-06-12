@@ -359,7 +359,7 @@ export default {
 }
 .list-name{
   display: inline-block;
-  width: 4%;
+  width: 40%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

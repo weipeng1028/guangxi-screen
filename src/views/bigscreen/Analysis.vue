@@ -74,8 +74,8 @@
           <div class="status">
             <span class="region-title">运行状态</span>
             <span v-if="this.dataArr<=30" class="status-data ordinary">一般</span>
-            <span v-if="this.dataArr>30&&this.dataArr<=80" class="status-data good">良好</span>
-            <span v-if="this.dataArr>70" class="status-data best">优秀</span>
+            <span v-if="this.dataArr>30&&this.dataArr<=60" class="status-data good">良好</span>
+            <span v-if="this.dataArr>60" class="status-data best">优秀</span>
           </div>
         </div>
       </div>
@@ -220,7 +220,7 @@ export default {
       this.$http.get(this.DashboardApi)
         .then(res => {
           this.dataArr = res.data.data.score
-          var colorTemplate1 = [[0.4, 'rgba(255,0,0,0.8)'], [0.85, 'rgba(0,255,255,0.8)'], [1, 'rgba(0,255,0,0.8)']]
+          var colorTemplate1 = [[0.3, 'rgba(255,0,0,0.8)'], [0.60, 'rgba(0,255,255,0.8)'], [1, 'rgba(0,255,0,0.8)']]
           var option = {
             tooltip: {
               // 本系列特定的 tooltip 设定。
@@ -1031,7 +1031,7 @@ export default {
   height: 98%;
 }
 .bottom {
-  height: 35%;
+  height: 34%;
   display: flex;
   justify-content: space-between;
   align-items: center;

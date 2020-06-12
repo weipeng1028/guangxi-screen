@@ -144,11 +144,11 @@ export default {
         .then(res => {
           if (res.data.data) {
             this.articleData = res.data.data
-            this.articleData.forEach(item => {
-              if (item.content.length > 450) {
-                item.content = item.content.substring(0, 495) + '...'
-              }
-            })
+            // this.articleData.forEach(item => {
+            //   if (item.content.length > 450) {
+            //     item.content = item.content.substring(0, 495) + '...'
+            //   }
+            // })
           }
         })
         .catch(() => {
@@ -337,11 +337,12 @@ export default {
   text-align: center;
   font-size: 0.444rem;
   line-height: 1.5;
-  margin-bottom: 0.05rem;
+  margin-bottom: 0.08rem;
 }
 .article-text{
   font-size: 0.33rem;
   letter-spacing: 0.05rem;
+  line-height: 1.4;
 }
 /**视频 */
 .video-content{

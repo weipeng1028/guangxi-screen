@@ -1,8 +1,10 @@
 <template>
   <div class="screen-box">
-              <div class="back-hone" v-if="!this.message" @click="backHome">
-            返回
-          </div>
+    <div class="box-shadow" v-if="this.message">
+    </div>
+    <div class="back-hone" v-if="!this.message" @click="backHome">
+        返回
+      </div>
     <iframe class="show-box" src="http://www.zfrmt.com.cn/ec/webpart/datav/dvLargeScreenAjax.jsp?cpyId=5db418b9-790e-48f6-9bf2-113d19ee6247&parType=statistic&timeType=year"></iframe>
   </div>
 </template>
@@ -38,7 +40,14 @@ export default {
   width: 100%;
   min-height: calc(100vh);
 }
-
+.box-shadow {
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  width: 100%;
+  min-height: calc(100vh);
+}
 .back-hone{
   color: rgba(240, 16, 27, 0.74);
   position: absolute;

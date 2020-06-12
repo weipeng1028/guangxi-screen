@@ -8,9 +8,7 @@
             <multipleColumn :message="backShow"></multipleColumn>
         </div>
         <div class="item three" @click="clickChart('3')" v-on:dblclick="dbclickChart('3')" style="transform: translate(-32.4%,34.5%) scale(0.33)">
-          <div class="box-shadow">
-          <v-iframe :message="backShow"></v-iframe>
-        </div>
+            <v-iframe :message="backShow"></v-iframe>
         </div>
         <div class="item four  active" @click="clickChart('4')" v-on:dblclick="dbclickChart('4')" style="transform: translate(30.7%, 0) scale(1)">
           <column :message="backShow"></column>
@@ -90,7 +88,6 @@ export default {
     'v-line': line
   }
 }
-
 </script>
 
 <style scoped>
@@ -116,6 +113,7 @@ export default {
   transition: all 0.8s;
   background: rgba(32, 32, 35, 0.5);
   cursor: pointer;
+  box-shadow: 0 .125rem .25rem rgba(255, 255, 255, .12), 0 0 .375rem rgba(255, 255, 255, .04)
 }
 .dashboard {
   position: relative;
@@ -165,5 +163,6 @@ export default {
   position: absolute;
   width: 100%;
   min-height: calc(100vh);
+  cursor: pointer;
 }
 </style>
