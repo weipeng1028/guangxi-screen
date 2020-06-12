@@ -8,7 +8,9 @@
             <multipleColumn :message="backShow"></multipleColumn>
         </div>
         <div class="item three" @click="clickChart('3')" v-on:dblclick="dbclickChart('3')" style="transform: translate(-32.4%,34.5%) scale(0.33)">
+          <div class="box-shadow">
           <v-iframe :message="backShow"></v-iframe>
+        </div>
         </div>
         <div class="item four  active" @click="clickChart('4')" v-on:dblclick="dbclickChart('4')" style="transform: translate(30.7%, 0) scale(1)">
           <column :message="backShow"></column>
@@ -155,5 +157,13 @@ export default {
 .show-box{
   width: 100%;
   height: 100%;
+}
+.box-shadow {
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  width: 100%;
+  min-height: calc(100vh);
 }
 </style>

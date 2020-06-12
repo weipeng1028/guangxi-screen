@@ -39,9 +39,8 @@
             </div>
             <div class="region-brief">
               <span class="region-title">账号简介:</span>
-              <span class="region-cont"
-                >账户简介内容,账户简介内容,账户简介内容,账户简介内容,账户简介内容,账户简介内容,账户简介内容</span
-              >
+              <span class="region-cont" v-if="regiontyp === 'wb'">广西壮族自治区人民检察院官方微博。传播检察动态，回应社会关切；传递正义力量，弘扬法治精神。</span>
+              <span class="region-cont" v-if="regiontyp === 'wx'">广西壮族自治区人民检察院微信公众平台。传播检察动态，回应社会关切；传递正义力量，弘扬法治精神。</span>
             </div>
           </div>
         </div>
@@ -221,11 +220,11 @@ export default {
       this.$http.get(this.DashboardApi)
         .then(res => {
           this.dataArr = res.data.data.score
-          var colorTemplate1 = [[0.3, 'rgba(255,0,0,0.8)'], [0.7, 'rgba(0,255,255,0.8)'], [1, 'rgba(0,255,0,0.8)']]
+          var colorTemplate1 = [[0.4, 'rgba(255,0,0,0.8)'], [0.85, 'rgba(0,255,255,0.8)'], [1, 'rgba(0,255,0,0.8)']]
           var option = {
             tooltip: {
               // 本系列特定的 tooltip 设定。
-              show: false,
+              show: true,
               // formatter: '{b}：{c}%',
               backgroundColor: 'rgba(50,50,50,0.7)', // 提示框浮层的背景颜色。注意：series.tooltip 仅在 tooltip.trigger 为 'item' 时有效。
               borderColor: '#333', // 提示框浮层的边框颜色。...
@@ -240,7 +239,7 @@ export default {
 
             series: [
               {
-                name: '单仪表盘示例', // 系列名称,用于tooltip的显示，legend 的图例筛选，在 setOption 更新数据和配置项时用于指定对应的系列。
+                name: '', // 系列名称,用于tooltip的显示，legend 的图例筛选，在 setOption 更新数据和配置项时用于指定对应的系列。
                 type: 'gauge', // 系列类型
                 radius: '80%', // 参数:number, string。 仪表盘半径,默认 75% ，可以是相对于容器高宽中较小的一项的一半的百分比，也可以是绝对的数值。
                 center: ['50%', '55%'], // 仪表盘位置(圆心坐标)
@@ -258,7 +257,7 @@ export default {
                     // 仪表盘轴线样式。
                     color: colorTemplate1, // 仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
                     opacity: 1, // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
-                    width: 30, // 轴线宽度,默认 30。
+                    width: 40, // 轴线宽度,默认 30。
                     shadowBlur: 20, // (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
                     shadowColor: '#fff' // 阴影颜色。支持的格式同color。
                   }
@@ -308,7 +307,7 @@ export default {
                   // 仪表盘指针。
                   show: true, // 是否显示指针,默认 true。
                   length: '70%', // 指针长度，可以是绝对数值，也可以是相对于半径的百分比,默认 80%。
-                  width: 5 // 指针宽度,默认 8。
+                  width: 8 // 指针宽度,默认 8。
                 },
 
                 itemStyle: {
@@ -332,7 +331,7 @@ export default {
                 title: {
                   // 仪表盘标题。
                   show: true, // 是否显示标题,默认 true。
-                  offsetCenter: [0, '20%'], // 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                  offsetCenter: [0, '105%'], // 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
                   color: '#fff', // 文字的颜色,默认 #333。
                   fontSize: 18 // 文字的字体大小,默认 15。
                 },
@@ -340,9 +339,9 @@ export default {
                 detail: {
                   // 仪表盘详情，用于显示数据。
                   show: true, // 是否显示详情,默认 true。
-                  offsetCenter: [0, '50%'], // 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                  offsetCenter: [0, '80%'], // 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
                   color: 'auto', // 文字的颜色,默认 auto。
-                  fontSize: 20, // 文字的字体大小,默认 15。
+                  fontSize: 25, // 文字的字体大小,默认 15。
                   formatter: '{value}' // 格式化函数或者字符串
                 },
 
@@ -405,7 +404,7 @@ export default {
             // 设置主标题风格
             color: '#1beafc', // 设置主标题字体颜色
             // 字体大小
-            fontSize: 25
+            fontSize: 30
           }
         },
         // 提示框
@@ -413,6 +412,12 @@ export default {
           trigger: 'axis',
           axisPointer: {
             type: 'shadow'
+          },
+          textStyle: {
+            // 设置主标题风格
+            color: '#1beafc', // 设置主标题字体颜色
+            // 字体大小
+            fontSize: 30
           }
         },
         // 保存图片
@@ -439,7 +444,7 @@ export default {
           right: '15',
           top: '10',
           textStyle: {
-            fontSize: 20,
+            fontSize: 25,
             color: '#fff'
           }
         },
@@ -582,6 +587,9 @@ export default {
                 axisPointer: {
                   type: 'shadow'
                 },
+                textStyle: {
+                  fontSize: 30
+                },
                 backgroundColor: 'rgba(0,0,0,0.7)', // 背景
                 padding: [8, 10], // 内边距
                 extraCssText: 'box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);', // 添加阴影
@@ -705,7 +713,7 @@ export default {
                     }
                   },
                   zlevel: 2,
-                  barWidth: '15%',
+                  barWidth: '20%',
                   data: value
                 },
                 {
@@ -725,7 +733,7 @@ export default {
                       }
                     }
                   },
-                  barWidth: '15%',
+                  barWidth: '20%',
                   data: maxData
                 }
               ]
@@ -1144,7 +1152,7 @@ export default {
 }
 .num {
   display: inline-block;
-  width: 2 rem;
+  width: 2rem;
   font-style: normal;
   text-align: right;
   text-align: center;

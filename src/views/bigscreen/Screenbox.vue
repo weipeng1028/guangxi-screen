@@ -43,7 +43,7 @@
                    @mouseenter="StopList()"
                    @mouseleave="UpList()">
                 <span @click="checkdTab(1)"
-                      :class="wxActive?'aricle-active':''"> <img :src="require('@/assets/images/wx.png')"> 微信</span>
+                      :class="wxActive?'aricle-active':''"> <img :src="require('@/assets/images/wx.png')">微信</span>
                 <span @click="checkdTab(2)"
                       :class="wbActive?'aricle-active':''"><img :src="require('@/assets/images/wb.png')">微博</span>
                 <span @click="checkdTab(3)"
@@ -609,7 +609,6 @@ export default {
 }
 .title-tabs {
   height: 20%;
-  line-height: 1.11rem;
   display: flex;
   justify-content: space-around;
 }
@@ -621,11 +620,12 @@ export default {
   border: none;
   cursor: pointer;
   font-size: 0.33rem;
+  align-self: center;
 }
 .title-tabs span img {
   height: 0.44rem;
   vertical-align: middle;
-  margin-right: 5px;
+  margin-right: 0.07rem;
 }
 .title-tabs .active {
   border: 1px solid #00ceff;

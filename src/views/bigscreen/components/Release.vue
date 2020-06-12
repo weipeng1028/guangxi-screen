@@ -258,7 +258,7 @@ export default {
   color: #fff;
   font-size: 0.33rem;
   text-align: center;
-  height: 20%;
+  height: 1.11rem;
   line-height: 1.11rem;
 }
 .area-rank .title::after {

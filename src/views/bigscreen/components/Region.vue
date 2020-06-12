@@ -220,7 +220,7 @@ export default {
   background-size: 100% 100%;
   width: 45%;
   height: 100%;
-  font-size: 0.8rem;
+  font-size: 0.7999rem;
   box-sizing: border-box;
   display: flex;
   align-items: center; /*定义body的元素垂直居中*/
@@ -309,12 +309,12 @@ export default {
   font-size: 0.33rem;
   justify-content: space-between;
   width: 100%;
-  height: 0.8rem;
+  height: 0.7999rem;
   padding: 0 15px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(64, 205, 221, 0.555);
   color: #fff;
-  line-height: 0.8rem;
+  line-height: 0.7999rem;
 }
 .article-content {
   overflow: hidden;
@@ -325,28 +325,28 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9)
 }
 .tubiao-size {
-  height: calc(100% - 0.8rem);
+  height: calc(100% - 0.7999rem);
   margin: 0 auto;
   overflow: hidden;
 }
 .new-list {
   font-size: 0.33rem;
   padding: 0 5px;
-  line-height: 0.8rem;
+  line-height: 0.7999rem;
   color: #fff;
   transition: top 0.5s;
 }
 .anim {
   transition: all 0.5s;
-  margin-top: -0.8rem;
+  margin-top: -0.7999rem;
   /* 高度等于行高 */
 }
 .show-article {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-  height: 0.8rem;
-  line-height: 0.8rem;
+  height: 0.7999rem;
+  line-height: 0.7999rem;
 }
 .company {
   display: inline-block;
@@ -359,7 +359,7 @@ export default {
 }
 .list-name{
   display: inline-block;
-  width: 48%;
+  width: 4%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

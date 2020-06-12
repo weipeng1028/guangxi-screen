@@ -17,7 +17,6 @@
           <div class="video-content">
             <div class="swiper-container">
               <div class="swiper-wrapper" @mouseenter="stopSwiper" @mouseleave="restSwiper">
-
                 <div class="swiper-slide slide_item" v-for="(item,i) in images" :key="i">
                   <div class="img-box">
                     <img :src="item.coverUrl" />
@@ -89,9 +88,6 @@ export default {
       mySwiper: {}
     }
   },
-  mounted () {
-    this.startSwiper()
-  },
   methods: {
     backHome () {
       this.$router.push({ name: 'dashboard' })
@@ -114,7 +110,7 @@ export default {
         paginationClickable: true,
         grabCursor: true, // 设置为true时，鼠标覆盖Swiper时指针会变成手掌形状，拖动时指针会变成抓手形状。
         autoplay: {
-          delay: 5000, // 自动切换延时
+          delay: 3000, // 自动切换延时
           stopOnLastSlide: false, // 如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
           disableOnInteraction: false // 用户操作swiper之后，是否禁止autoplay。默认为true：停止。
         },
@@ -150,7 +146,7 @@ export default {
             this.articleData = res.data.data
             this.articleData.forEach(item => {
               if (item.content.length > 450) {
-                item.content = item.content.substring(0, 450) + '...'
+                item.content = item.content.substring(0, 495) + '...'
               }
             })
           }
@@ -174,6 +170,9 @@ export default {
     document.getElementsByTagName('head')[0].appendChild(oMeta)
     this.getVideo()
     this.getArticle()
+  },
+  mounted () {
+    this.startSwiper()
   }
 }
 </script>

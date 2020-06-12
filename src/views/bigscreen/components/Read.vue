@@ -68,9 +68,9 @@ export default {
               legend: {// 图例组件，颜色和名字
                 right: '10%',
                 top: '5%',
-                itemGap: 16,
-                itemWidth: 18,
-                itemHeight: 10,
+                itemGap: 20,
+                itemWidth: 25,
+                itemHeight: 15,
                 data: [{
                   name: '微信'
                   // icon:'image://../wwwroot/js/url2.png', //路径
@@ -85,10 +85,10 @@ export default {
                   name: '头条'
                 }],
                 textStyle: {
-                  color: '#a8aab0',
+                  color: '#fff',
                   fontStyle: 'normal',
                   fontFamily: '微软雅黑',
-                  fontSize: 18
+                  fontSize: 25
                 }
               },
               xAxis: [
@@ -318,7 +318,7 @@ export default {
   color: #fff;
   font-size: 0.33rem;
   text-align: center;
-  height: 20%;
+  height: 1.11rem;
   line-height: 1.11rem;
 }
 .area-rank .title::after {
