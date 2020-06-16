@@ -34,7 +34,7 @@ let routes = [
 ]
 const router = new Router({
   mode: 'history',
-  base: process.env.NODE_ENV === 'production' ? '/bjjcBigScreen' : '/',
+  base: process.env.NODE_ENV === 'production' ? window.g.base : '/',
   linkActiveClass: 'active',
   routes,
   // 滚动行为

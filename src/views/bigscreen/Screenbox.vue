@@ -163,6 +163,7 @@ export default {
                 fontWeight: 'bold'
               },
               formatter: function (params, ticket, callback) {
+                console.log(params.data.wxRead)
                 if (params.data.wxRead) {
                   return '地区名称：' + params.data.name +
                       '<br/>' + '微信' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan

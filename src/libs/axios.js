@@ -84,18 +84,33 @@ const errorHandle = (status, other) => {
       tip('系统异常，请稍后再试！')
   }
 }
-var instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Headers':
-      'Origin, X-Requested-With, Content-Type, Accept',
-    'X-Requested-With': 'XMLHttpRequest'
-  }
-})
+if (process.env.NODE_ENV === 'development') {
+  var instance = axios.create({
+    baseURL: process.env.VUE_APP_BASE_URL,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+} else {
+  instance = axios.create({
+    baseURL: window.g.baseUrl,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Headers':
+        'Origin, X-Requested-With, Content-Type, Accept',
+      'X-Requested-With': 'XMLHttpRequest'
+    }
+  })
+}
 // 设置post请求头
 // instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
