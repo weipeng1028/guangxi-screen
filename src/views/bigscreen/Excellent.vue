@@ -4,7 +4,9 @@
       <div class="screen-bg">
         新媒体优秀作品展示
       </div>
-      <div class="back-hone" v-if="!this.message" @click="backHome">
+      <div class="back-hone"
+           v-if="!this.message"
+           @click="backHome">
         返回
       </div>
     </div>
@@ -15,15 +17,21 @@
             <p>优秀视频展示</p>
           </div>
           <div class="video-content">
-            <div class="swiper-container">
-              <div class="swiper-wrapper" @mouseenter="stopSwiper" @mouseleave="restSwiper">
-                <div class="swiper-slide slide_item" v-for="(item,i) in images" :key="i">
-                  <div class="img-box">
-                    <img :src="item.coverUrl" />
+            <div>
+              <div class="swiper-container">
+                <div class="swiper-wrapper"
+                     @mouseenter="stopSwiper"
+                     @mouseleave="restSwiper">
+                  <div class="swiper-slide slide_item"
+                       v-for="(item,i) in images"
+                       :key="i">
+                    <div class="img-box">
+                      <img :src="item.coverUrl" />
+                    </div>
+                    <img :src="require('@/assets/images/text/autoPlay.png')"
+                         @click="routerWeb(item)"
+                         class="center-img">
                   </div>
-                  <img :src="require('@/assets/images/text/autoPlay.png')"
-                            @click="routerWeb(item)"
-                            class="center-img">
                 </div>
               </div>
             </div>
@@ -34,20 +42,31 @@
             <p>优秀文章展示</p>
           </div>
           <div class="content">
-            <el-carousel  direction="vertical" :interval="5000" :autoplay="true" indicator-position="none">
-              <el-carousel-item v-for="(item, index) in articleData" :key="index">
+            <el-carousel direction="vertical"
+                         :interval="5000"
+                         :autoplay="true"
+                         indicator-position="none"
+                         v-if="articleData.length>0">
+              <el-carousel-item v-for="(item, index) in articleData"
+                                :key="index">
                 <div class="article-cont">
-                  <div class="article-title" v-html="item.title">
+                  <div class="article-title"
+                       v-html="item.title">
                   </div>
                   <div class="article-text">
-                    <img ref="banner" @click="findArticle(item, index)"
-                    :src="item.cover"
-                    class="bannerImg">
-                      {{item.content}}
+                    <img ref="banner"
+                         @click="findArticle(item, index)"
+                         :src="item.cover"
+                         class="bannerImg">
+                    {{item.content}}
                   </div>
                 </div>
               </el-carousel-item>
             </el-carousel>
+            <div v-else
+                 class="content-center">
+                <p>暂无数据</p>
+            </div>
           </div>
         </div>
       </div>
@@ -56,15 +75,21 @@
           <p>优秀图片展示</p>
         </div>
         <div class="swiper-box"
-             ref="element">
-          <div ref="bannerbox" v-for="(item, index) in articleData"
+             ref="element" v-if="articleData.length>0">
+          <div ref="bannerbox"
+               v-for="(item, index) in articleData"
                :key="index"
                class="bannerbox">
-            <img ref="banner" @click="findArticle(item, index)"
+            <img ref="banner"
+                 @click="findArticle(item, index)"
                  :src="item.cover"
                  class="bannerImg">
           </div>
         </div>
+        <div v-else
+                 class="content-center">
+                <p>暂无数据</p>
+            </div>
       </div>
     </div>
   </div>
@@ -185,7 +210,8 @@ export default {
   min-height: calc(100vh);
   margin: 0 auto;
   box-sizing: content-box;
-  background: #010e50 url(../../assets/images/bigscreen.png) center top no-repeat;
+  background: #010e50 url(../../assets/images/bigscreen.png) center top
+    no-repeat;
   background-size: 100% 100%;
   line-height: 1.15;
 }
@@ -194,7 +220,7 @@ export default {
   height: 1.8rem;
   margin: 0 auto;
 }
-.screen-bg{
+.screen-bg {
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
   background-size: 50% 2rem;
@@ -242,10 +268,10 @@ export default {
   overflow: hidden;
   position: relative;
 }
-.content-carousel{
+.content-carousel {
   width: 66%;
 }
-.content .el-carousel{
+.content .el-carousel {
   height: 100%;
 
   margin: 0 auto;
@@ -289,7 +315,7 @@ export default {
   margin-right: 10px;
   animation: 50s wordsLoop linear infinite normal;
 }
-.bannerImg{
+.bannerImg {
   width: 100%;
   height: 100%;
   cursor: pointer;
@@ -299,15 +325,15 @@ export default {
     transform: translateX(300%);
     -webkit-transform: translateX(300%);
   }
-  25%{
+  25% {
     transform: translateX(0);
     -webkit-transform: translateX(0);
   }
-  50%{
+  50% {
     transform: translateX(-300%);
     -webkit-transform: translateX(-300%);
   }
-  75%{
+  75% {
     transform: translateX(0);
     -webkit-transform: translateX(0);
   }
@@ -316,10 +342,10 @@ export default {
     -webkit-transform: translateX(300%);
   }
 }
-.article-cont{
+.article-cont {
   height: 100%;
   overflow: hidden;
-  padding:0.28rem;
+  padding: 0.28rem;
   word-break: break-all;
   font-size: 0.28rem;
   text-indent: 0.44rem;
@@ -327,25 +353,25 @@ export default {
   box-sizing: border-box;
   color: #fff;
 }
-.article-cont .bannerImg{
+.article-cont .bannerImg {
   width: 25%;
   height: 25%;
-  float:left;
+  float: left;
   margin: 0 0.14rem 0.14rem 0;
 }
-.article-title{
+.article-title {
   text-align: center;
   font-size: 0.444rem;
   line-height: 1.5;
   margin-bottom: 0.08rem;
 }
-.article-text{
+.article-text {
   font-size: 0.33rem;
   letter-spacing: 0.05rem;
   line-height: 1.4;
 }
 /**视频 */
-.video-content{
+.video-content {
   width: 100%;
   height: calc(100% - 1.11rem);
   display: block;
@@ -356,34 +382,46 @@ export default {
   padding: 1%;
   box-sizing: border-box;
 }
-.swiper-container{
+.swiper-container {
   height: 100%;
 }
-.swiper-slide{
+.swiper-slide {
   height: 100%;
 }
-.swiper-slide .img-box{
+.swiper-slide .img-box {
   height: 100%;
   max-width: 90%;
   display: block;
   margin: 0 auto;
 }
-.swiper-slide .img-box img{
+.swiper-slide .img-box img {
   width: 100%;
   height: 100%;
 }
-.center-img{
+.center-img {
   width: 20%;
   position: absolute;
   left: 40%;
   top: 40%;
 }
-.back-hone{
+.back-hone {
   color: rgba(240, 16, 27, 0.74);
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
   font-size: 0.5rem;
   cursor: pointer;
+}
+.content-center {
+  display: flex;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.content-center p{
+  width: 100%;
+    font-size: 0.33rem;
+  align-self: center;
 }
 </style>

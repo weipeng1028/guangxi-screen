@@ -202,7 +202,8 @@ export default {
       userData: [],
       userTime: [],
       rankingFirst: [],
-      rankingLast: []
+      rankingLast: [],
+      titleText: ''
     }
   },
   methods: {
@@ -389,9 +390,15 @@ export default {
         .then(res => {
           this.userData = res.data.data.listData
           this.userTime = res.data.data.listTime
+          this.titleText = '传播趋势图'
           this.gitLineCenter()
         })
-        .catch(() => {})
+        .catch(() => {
+          this.userData = []
+          this.userTime = []
+          this.titleText = '暂无数据'
+          this.gitLineCenter()
+        })
     },
     // 折线图
     gitLineCenter () {

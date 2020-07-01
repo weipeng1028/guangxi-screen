@@ -5,14 +5,14 @@
         <div>
           <p class="name">微博粉丝数</p>
           <p class="num"
-                     v-text="this.wbFans"></p>
+             v-text="this.wbFans"></p>
         </div>
       </div>
       <div class="top-box">
         <div>
           <p class="name">微信关注总条数</p>
           <p class="num"
-                     v-text="this.wxFans"></p>
+             v-text="this.wxFans"></p>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
         </p>
         <div id="area-article"
              class="tubiao-size">
-          <ul class="new-list"
+          <ul class="new-list" v-if="att.length>0"
               :class="{anim:animateRank}"
               @mouseenter="StopRank()"
               @mouseleave="UpRank()">
@@ -57,41 +57,51 @@
               <span style="width:12%;text-align: center;">{{item.total}}</span>
             </li>
           </ul>
+         <div v-else
+                 class="content-center">
+                <p>暂无数据</p>
+            </div>
         </div>
       </div>
-      <div id="area-rank-tuxing" v-else
-                   class="article-content">
-                <p class="article-top">
-                  <span style="width:10%;text-align: left;">排名</span>
-                  <span style="width:15%;text-align: left;">渠道</span>
-                  <span class="company">文章标题</span>
-                  <span style="width:15%;text-align: center;">热度</span>
-                </p>
-                <div id="area-article"
-                     class="tubiao-size">
-                  <ul class="new-list"
-                      :class="{anim:animateHot}"
-                      @mouseenter="StopHot()"
-                      @mouseleave="UpHot()">
-                    <li v-for="(item,index) in arr"
-                        :key="index"
-                        class="show-article">
-                      <span style="width:10%;text-align: left;">{{item.num}}</span>
-                      <span v-if="item.source===1"
-                            style="width:15%;text-align: left;">微信</span>
-                      <span v-if="item.source===2"
-                            style="width:15%;text-align: left;">微博</span>
-                      <span v-if="item.source===4"
-                            style="width:15%;text-align: left;">头条</span>
-                      <span v-if="item.source===5"
-                            style="width:15%;text-align: left;">抖音</span>
-                      <span @click="activeWeb(item)"
-                            class="company">{{item.title}}</span>
-                      <span style="width:15%;text-align: center;">{{item.hotnum}}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+      <div id="area-rank-tuxing"
+           v-else
+           class="article-content">
+        <p class="article-top">
+          <span style="width:10%;text-align: left;">排名</span>
+          <span style="width:15%;text-align: left;">渠道</span>
+          <span class="company">文章标题</span>
+          <span style="width:15%;text-align: center;">热度</span>
+        </p>
+        <div id="area-article"
+             class="tubiao-size">
+          <ul class="new-list"
+              :class="{anim:animateHot}"
+              v-if="arr.length>0"
+              @mouseenter="StopHot()"
+              @mouseleave="UpHot()">
+            <li v-for="(item,index) in arr"
+                :key="index"
+                class="show-article">
+              <span style="width:10%;text-align: left;">{{item.num}}</span>
+              <span v-if="item.source===1"
+                    style="width:15%;text-align: left;">微信</span>
+              <span v-if="item.source===2"
+                    style="width:15%;text-align: left;">微博</span>
+              <span v-if="item.source===4"
+                    style="width:15%;text-align: left;">头条</span>
+              <span v-if="item.source===5"
+                    style="width:15%;text-align: left;">抖音</span>
+              <span @click="activeWeb(item)"
+                    class="company">{{item.title}}</span>
+              <span style="width:15%;text-align: center;">{{item.hotnum}}</span>
+            </li>
+          </ul>
+          <div v-else
+                 class="content-center">
+                <p>暂无数据</p>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -319,10 +329,11 @@ export default {
 .article-content {
   overflow: hidden;
   height: 80%;
-  background: url("../../../assets/images/articleBg-All.png") no-repeat bottom center;
+  background: url('../../../assets/images/articleBg-All.png') no-repeat bottom
+    center;
   background-size: 100% 99%;
   box-sizing: border-box;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9)
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9);
 }
 .tubiao-size {
   height: calc(100% - 0.7999rem);
@@ -357,11 +368,23 @@ export default {
   cursor: pointer;
   text-align: left;
 }
-.list-name{
+.list-name {
   display: inline-block;
   width: 40%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.content-center {
+  display: flex;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.content-center p {
+  width: 100%;
+  font-size: 0.33rem;
+  align-self: center;
 }
 </style>

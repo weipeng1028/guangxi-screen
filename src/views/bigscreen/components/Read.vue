@@ -15,6 +15,7 @@
 import echarts from 'echarts/lib/echarts' // echarts
 import 'echarts/lib/component/visualMap'
 require('echarts/lib/chart/line')
+require('echarts/lib/component/title')
 require('echarts/lib/component/tooltip')
 export default {
   data () {
@@ -64,6 +65,16 @@ export default {
                 top: '15%',
                 // padding:'0 0 10 0',
                 containLabel: true
+              },
+              title: {
+                show: Object.keys(res.data.data.wx).length === 0,
+                extStyle: {
+                  color: 'fff',
+                  fontSize: 20
+                },
+                text: '暂无数据',
+                left: 'center',
+                top: 'center'
               },
               legend: {// 图例组件，颜色和名字
                 right: '10%',

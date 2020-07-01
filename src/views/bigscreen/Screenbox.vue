@@ -4,7 +4,9 @@
       <div class="screen-bg">
         新媒体大屏统计分析
       </div>
-      <div class="back-hone" v-if="!this.message" @click="backHome">
+      <div class="back-hone"
+           v-if="!this.message"
+           @click="backHome">
         返回
       </div>
     </div>
@@ -48,8 +50,8 @@
                       :class="wbActive?'aricle-active':''"><img :src="require('@/assets/images/wb.png')">微博</span>
                 <span @click="checkdTab(3)"
                       :class="tdActive?'aricle-active':''"><img :src="require('@/assets/images/tt.png')">今日头条</span>
-                <span @click="checkdTab(4)"
-                      :class="dyActive?'aricle-active':''"><img :src="require('@/assets/images/dy.png')">抖音</span>
+                <!-- <span @click="checkdTab(4)"
+                      :class="dyActive?'aricle-active':''"><img :src="require('@/assets/images/dy.png')">抖音</span> -->
               </div>
               <div class="article-content">
                 <p class="article-top">
@@ -60,6 +62,7 @@
                 <div id="area-article"
                      class="tubiao-size">
                   <ul class="new-list"
+                      v-if="articleList.length>0"
                       :class="{anim:animateList}"
                       @mouseenter="StopList()"
                       @mouseleave="UpList()">
@@ -72,6 +75,10 @@
                       <span style="width:15%;text-align:center;">{{item.readNum}}</span>
                     </li>
                   </ul>
+                  <div v-else
+                       class="content-center">
+                    <p>暂无数据</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -163,19 +170,18 @@ export default {
                 fontWeight: 'bold'
               },
               formatter: function (params, ticket, callback) {
-                console.log(params.data.wxRead)
                 if (params.data.wxRead) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '微信' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan
+                    '<br/>' + '微信' + '<br/>' + '阅读数：' + params.data.wxRead + '<br/>' + '点赞数：' + params.data.wxDianzan
                 } else if (params.data.wbDianzan) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '微博' + '<br/>' + '点赞数：' + params.data.wbDianzan + '<br/>' + '评论数：' + params.data.wbPinglun + '<br/>' + '转发数：' + params.data.wbZhuanfa
+                    '<br/>' + '微博' + '<br/>' + '点赞数：' + params.data.wbDianzan + '<br/>' + '评论数：' + params.data.wbPinglun + '<br/>' + '转发数：' + params.data.wbZhuanfa
                 } else if (params.data.jrttRead) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '今日头条' + '<br/>' + '阅读数：' + params.data.jrttRead + '<br/>' + '评论数：' + params.data.jrttPinglun + '<br/>' + '转发数：' + params.data.jrttZhuanfa
+                    '<br/>' + '今日头条' + '<br/>' + '阅读数：' + params.data.jrttRead + '<br/>' + '评论数：' + params.data.jrttPinglun + '<br/>' + '转发数：' + params.data.jrttZhuanfa
                 } else if (params.data.dyDianzan) {
                   return '地区名称：' + params.data.name +
-                      '<br/>' + '抖音' + '<br/>' + '点赞数：' + params.data.dyDianzan + '<br/>' + '评论数：' + params.data.dyPinglun + '<br/>' + '转发数：' + params.data.dyZhuanfa
+                    '<br/>' + '抖音' + '<br/>' + '点赞数：' + params.data.dyDianzan + '<br/>' + '评论数：' + params.data.dyPinglun + '<br/>' + '转发数：' + params.data.dyZhuanfa
                 }
               }
             },
@@ -512,7 +518,8 @@ export default {
   min-height: calc(100vh);
   margin: 0 auto;
   box-sizing: content-box;
-  background: #010e50 url(../../assets/images/bigscreen.png) center top no-repeat;
+  background: #010e50 url(../../assets/images/bigscreen.png) center top
+    no-repeat;
   background-size: 100% 100%;
   line-height: 1.15;
 }
@@ -521,7 +528,7 @@ export default {
   height: 1.8rem;
   margin: 0 auto;
 }
-.screen-bg{
+.screen-bg {
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
   background-size: 50% 2rem;
@@ -639,7 +646,8 @@ export default {
 .article-content {
   overflow: hidden;
   height: 80%;
-  background: url('../../assets/images/articleBg-All.png') no-repeat bottom center;
+  background: url('../../assets/images/articleBg-All.png') no-repeat bottom
+    center;
   background-size: 100% 99%;
   box-sizing: border-box;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.9);
@@ -681,7 +689,7 @@ export default {
   height: 0.9rem;
   line-height: 0.9rem;
 }
-.new-company{
+.new-company {
   width: 85%;
   overflow: hidden;
   white-space: nowrap;
@@ -689,16 +697,28 @@ export default {
   cursor: pointer;
   text-align: left;
 }
-.release-box{
+.release-box {
   width: 98%;
   height: 100%;
 }
-.back-hone{
+.back-hone {
   color: rgba(240, 16, 27, 0.74);
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
   font-size: 0.5rem;
   cursor: pointer;
+}
+.content-center {
+  display: flex;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.content-center p {
+  width: 100%;
+  font-size: 0.33rem;
+  align-self: center;
 }
 </style>

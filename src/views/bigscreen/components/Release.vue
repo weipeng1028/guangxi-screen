@@ -13,9 +13,11 @@ import echarts from 'echarts/lib/echarts' // echarts
 import 'echarts/lib/component/visualMap'
 require('echarts/lib/chart/bar')
 require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
 export default {
   data () {
     return {
+      barData: [],
       timer: null,
       faultByHourIndex: 0,
       lineChart: '',
@@ -27,6 +29,7 @@ export default {
       let monitorBar = echarts.init(document.getElementById('release-num'))
       this.$http.get(this.$api.monthReadDifference)
         .then(res => {
+          this.barData = res.data.data
           // 排行数据
           var option = {
             tooltip: {
@@ -37,6 +40,16 @@ export default {
                 // 坐标轴指示器，坐标轴触发有效
                 type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
               }
+            },
+            title: {
+              show: Object.keys(res.data.data).length === 0,
+              extStyle: {
+                color: 'fff',
+                fontSize: 20
+              },
+              text: '暂无数据',
+              left: 'center',
+              top: 'center'
             },
             legend: {
               data: ['趋势', '三十天', '六十天', '九十天'],
