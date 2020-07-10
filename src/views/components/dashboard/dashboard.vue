@@ -25,10 +25,18 @@ import iframe from '@/views/bigscreen/Iframe'
 export default {
   data () {
     return {
+      tokens: '',
       backShow: true,
       items: []
     }
   },
+  // created () {
+  //   this.tokens = window.location.href.split('?token=')[1]
+  //   this.$store.commit('user/userToken', this.tokens) // 用户信息
+  //   if (this.token) {
+  //     this.$store.commit('user/userToken', this.token) // 用户信息
+  //   }
+  // },
   mounted () {
     this.atInit()
   },

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Message, Loading } from 'element-ui'
-import store from '../store/index'
+import store from '../store/modules/user'
 import router from '../router/router'
 // import Qs from 'qs'
 const tip = msg => {
