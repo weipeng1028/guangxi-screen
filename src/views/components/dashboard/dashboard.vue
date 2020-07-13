@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="dashboard">
-    <div class="flex-container column">
+    <div class="flex-container column" v-if='jurisdiction'>
         <div class="item one" @click="clickChart('1')" v-on:dblclick="dbclickChart('1')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
            <v-line :message="backShow"></v-line>
         </div>
@@ -26,21 +26,32 @@ export default {
   data () {
     return {
       tokens: '',
+      jurisdiction: false,
       backShow: true,
       items: []
     }
   },
-  // created () {
-  //   this.tokens = window.location.href.split('?token=')[1]
-  //   this.$store.commit('user/userToken', this.tokens) // 用户信息
-  //   if (this.token) {
-  //     this.$store.commit('user/userToken', this.token) // 用户信息
-  //   }
-  // },
+  created () {
+    this.tokens = window.location.href.split('/?auth=')
+    if (this.tokens) {
+      this.jurisdiction = true
+      this.$store.commit('user/userToken', this.tokens)
+      // this.getAuth()
+    } else {
+      this.jurisdiction = false
+    }
+  },
   mounted () {
     this.atInit()
   },
   methods: {
+    getAuth () {
+      this.$http.get(window.g.bigScreen)
+        .then(res => {
+          this.jurisdiction = true
+        })
+        .catcl(() => {})
+    },
     atResize () {
       this.$root.charts.forEach((myChart) => {
         myChart.resize()
