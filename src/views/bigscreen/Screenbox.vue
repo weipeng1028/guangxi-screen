@@ -251,7 +251,7 @@ export default {
           monitorMap.on('click', function (e) {
             clearInterval(than.fhourTime)
             than.fhourTime = undefined
-            than.region = e.name
+            than.regions = e.name
             than.idx = undefined
             than.cityShow = false
             than.getarticle()
@@ -282,7 +282,7 @@ export default {
             })
 
             if (than.regions[hourIndex]) {
-              than.region = than.regions[hourIndex].name
+              than.regions = than.regions[hourIndex].name
               than.getarticle()
             }
             hourIndex++
@@ -388,6 +388,7 @@ export default {
     getarticle () {
       this.StopList()
       var titles = ''
+
       var reg = /[\u4e00-\u9fa5]/g
       this.$http.get(this.$api.channelsLatestReadNum, { params: { id: this.articleType, region: this.regions } })
         .then(res => {
