@@ -34,29 +34,28 @@ export default {
   created () {
     this.tokens = window.location.href.split('/?auth=')[1]
     if (this.tokens) {
-      this.jurisdiction = true
       this.$store.commit('user/userToken', this.tokens)
-      // this.getAuth()
-    } else {
-      this.jurisdiction = false
-      this.$message.warning('请登录后在尝试!')
-      setTimeout(function () {
-        let url = window.g.login
-        window.open(url, '_self')
-      }, 2000)
+      this.$http.get(window.g.bigScreen)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.jurisdiction = true
+          } else {
+            this.jurisdiction = false
+            this.$message.warning('请登录后在尝试!')
+            setTimeout(function () {
+              let url = window.g.login
+              window.open(url, '_self')
+            }, 2000)
+          }
+        })
+        .catch(() => {
+        })
     }
   },
   mounted () {
     this.atInit()
   },
   methods: {
-    getAuth () {
-      this.$http.get(window.g.bigScreen)
-        .then(res => {
-          this.jurisdiction = true
-        })
-        .catcl(() => {})
-    },
     atResize () {
       this.$root.charts.forEach((myChart) => {
         myChart.resize()
