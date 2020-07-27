@@ -1,5 +1,5 @@
 window.g = {
-  baseUrl: 'http://39.100.100.115/gx',
+  baseUrl: 'http://39.100.100.115',
   baseRoute: 'http://39.100.100.115',
   base: 'gxjcBigScreen',
   login: 'http://39.100.100.115/gxjcy/auth/login',

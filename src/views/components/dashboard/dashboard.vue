@@ -1,16 +1,16 @@
 <template lang="html">
   <div class="dashboard">
     <div class="flex-container column" v-if='jurisdiction'>
-        <div class="item one" @click="clickChart('1')" v-on:dblclick="dbclickChart('1')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
+        <div class="item one" @click="clickChart('1')" v-on:dblclick="dbclickChart('Analysis')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
            <v-line :message="backShow"></v-line>
         </div>
-        <div class="item two" @click="clickChart('2')" v-on:dblclick="dbclickChart('2')" style="transform: translate(-32.4%,0.5%) scale(0.33)">
+        <div class="item two" @click="clickChart('2')" v-on:dblclick="dbclickChart('Excellent')" style="transform: translate(-32.4%,0.5%) scale(0.33)">
             <multipleColumn :message="backShow"></multipleColumn>
         </div>
-        <div class="item three" @click="clickChart('3')" v-on:dblclick="dbclickChart('3')" style="transform: translate(-32.4%,34.5%) scale(0.33)">
+        <div class="item three" @click="clickChart('3')" v-on:dblclick="dbclickChart('Iframe')" style="transform: translate(-32.4%,34.5%) scale(0.33)">
             <v-iframe :message="backShow"></v-iframe>
         </div>
-        <div class="item four  active" @click="clickChart('4')" v-on:dblclick="dbclickChart('4')" style="transform: translate(30.7%, 0) scale(1)">
+        <div class="item four  active" @click="clickChart('4')" v-on:dblclick="dbclickChart('Bigscreen')" style="transform: translate(30.7%, 0) scale(1)">
           <column :message="backShow"></column>
         </div>
     </div>
@@ -26,31 +26,35 @@ export default {
   data () {
     return {
       tokens: '',
-      jurisdiction: false,
+      jurisdiction: true,
       backShow: true,
       items: []
     }
   },
   created () {
     this.tokens = window.location.href.split('/?auth=')[1]
-    if (this.tokens) {
-      this.$store.commit('user/userToken', this.tokens)
-      this.$http.get(window.g.bigScreen)
-        .then(res => {
-          if (res.data.code === 200) {
-            this.jurisdiction = true
-          } else {
-            this.jurisdiction = false
-            this.$message.warning('请登录后在尝试!')
-            setTimeout(function () {
-              let url = window.g.login
-              window.open(url, '_self')
-            }, 2000)
-          }
-        })
-        .catch(() => {
-        })
-    }
+    // if (this.tokens) {
+    //   this.$store.commit('user/userToken', this.tokens)
+    //   this.$http.get(this.$api.bigScreen)
+    //     .then(res => {
+    //       if (res.data.code === 200) {
+    //         this.jurisdiction = true
+    //       } else {
+    //         this.jurisdiction = false
+    //         this.$message.warning('请登录后在尝试!')
+    //         setTimeout(function () {
+    //           let url = window.g.login
+    //           window.open(url, '_self')
+    //         }, 2000)
+    //       }
+    //     })
+    //     .catch(() => {
+    //       setTimeout(function () {
+    //         let url = window.g.login
+    //         window.open(url, '_self')
+    //       }, 2000)
+    //     })
+    // }
   },
   mounted () {
     this.atInit()
@@ -82,20 +86,7 @@ export default {
       }
     },
     dbclickChart (index) {
-      switch (index) {
-        case '1':
-          this.$router.push({ name: 'Analysis' })
-          break
-        case '2':
-          this.$router.push({ name: 'Excellent' })
-          break
-        case '3':
-          this.$router.push({ name: 'Iframe' })
-          break
-        case '4':
-          this.$router.push({ name: 'Bigscreen' })
-          break
-      }
+      this.$router.push({ name: index })
     },
     atSetStyle (el1, el2) {
       let transform1 = el1.style.transform

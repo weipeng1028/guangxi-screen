@@ -280,9 +280,8 @@ export default {
               seriesIndex: 0,
               dataIndex: hourIndex
             })
-
-            if (than.regions[hourIndex]) {
-              than.regions = than.regions[hourIndex].name
+            if (than.mapOption.series[0].data[hourIndex].name) {
+              than.regions = than.mapOption.series[0].data[hourIndex].name
               than.getarticle()
             }
             hourIndex++
@@ -329,8 +328,8 @@ export default {
                   dataIndex: hourIndex
                 })
 
-                if (than.regions[hourIndex]) {
-                  than.region = than.regions[hourIndex].name
+                if (than.mapOption.series[0].data[hourIndex].name) {
+                  than.regions = than.mapOption.series[0].data[hourIndex].name
                   than.getarticle()
                 }
                 hourIndex++
