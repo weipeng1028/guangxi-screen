@@ -1,6 +1,6 @@
 export default {
   // 日志
-  bigScreen: 'http://192.168.10.12:29998/gxjcy/media/bigscreen/checkAuth',
+  bigScreen: window.g.bigScreen,
   // upload: 'http://47.93.1.52/product/media/common/file/upload', // POST 上传
   // upload: 'http://192.168.10.68:9998/product/media/common/file/upload', // POST 上传
   // download: 'http://47.93.1.52/product/media/common/file/download', // GET 文件下载
