@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard"  >
+  <div class="dashboard">
       <div class="flex-container column" >
           <div class="item one" @click="clickChart('1')" v-on:dblclick="dbclickChart('Analysis')" style="transform: translate(-32.4%,-33.5%) scale(0.33)">
             <v-line :message="backShow" v-if='jurisdiction'></v-line>
