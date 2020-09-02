@@ -7,7 +7,7 @@
       <div class="back-hone"
            v-if="!this.message"
            @click="backHome">
-        返回
+        <i class="el-icon-back"></i>
       </div>
     </div>
     <div class="data-content">
@@ -491,7 +491,7 @@ export default {
         })
     },
     backHome () {
-      this.$router.push({ name: 'dashboard' })
+      this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
     }
   },
   created () {
@@ -704,7 +704,7 @@ export default {
 .back-hone {
   color: rgba(240, 16, 27, 0.74);
   position: absolute;
-  right: 0.5rem;
+  left: 0.5rem;
   top: 0.5rem;
   font-size: 0.5rem;
   cursor: pointer;

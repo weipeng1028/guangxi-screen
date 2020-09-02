@@ -1,9 +1,16 @@
+<!--
+ * @Email: 您选择的账号不在服务区
+ * @Author: MaiChao
+ * @Date: 2020-06-10 13:50:15
+ * @LastEditors: MaiChao
+ * @LastEditTime: 2020-08-11 18:36:32
+-->
 <template>
   <div class="screen-box">
     <div class="box-shadow" v-if="this.message">
     </div>
     <div class="back-hone" v-if="!this.message" @click="backHome">
-        返回
+        <i class="el-icon-back"></i>
       </div>
     <iframe class="show-box" src="http://www.zfrmt.com.cn/ec/webpart/datav/dvLargeScreenAjax.jsp?cpyId=5db418b9-790e-48f6-9bf2-113d19ee6247&parType=statistic&timeType=year"></iframe>
   </div>
@@ -16,7 +23,7 @@ export default {
   },
   methods: {
     backHome () {
-      this.$router.push({ name: 'dashboard' })
+      this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
     }
   },
   created () {
@@ -51,7 +58,7 @@ export default {
 .back-hone{
   color: rgba(240, 16, 27, 0.74);
   position: absolute;
-  right: 0.5rem;
+  left: 0.5rem;
   top: 0.5rem;
   font-size: 0.5rem;
   cursor: pointer;
