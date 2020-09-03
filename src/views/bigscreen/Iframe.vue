@@ -3,31 +3,58 @@
  * @Author: MaiChao
  * @Date: 2020-06-10 13:50:15
  * @LastEditors: MaiChao
- * @LastEditTime: 2020-08-11 18:36:32
+ * @LastEditTime: 2020-09-02 20:14:03
 -->
 <template>
-  <div class="screen-box">
-    <div class="box-shadow" v-if="this.message">
+  <div class="screen-box"
+       v-if='jurisdiction'>
+    <div class="box-shadow"
+         v-if="this.message">
     </div>
-    <div class="back-hone" v-if="!this.message" @click="backHome">
-        <i class="el-icon-back"></i>
-      </div>
-    <iframe class="show-box" src="http://www.zfrmt.com.cn/ec/webpart/datav/dvLargeScreenAjax.jsp?cpyId=5db418b9-790e-48f6-9bf2-113d19ee6247&parType=statistic&timeType=year"></iframe>
+    <div class="back-hone"
+         v-if="!this.message"
+         @click="backHome">
+      <i class="el-icon-back"></i>
+    </div>
+    <iframe class="show-box"
+            src="http://www.zfrmt.com.cn/ec/webpart/datav/dvLargeScreenAjax.jsp?cpyId=5db418b9-790e-48f6-9bf2-113d19ee6247&parType=statistic&timeType=year"></iframe>
   </div>
 </template>
 <script>
 export default {
   props: ['message'],
   data () {
-    return {}
+    return {
+      jurisdiction: false
+    }
   },
   methods: {
     backHome () {
       this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
+    },
+    banckLogin () {
+      setTimeout(function () {
+        let url = window.g.login
+        window.open(url, '_self')
+      }, 2000)
     }
   },
   created () {
-
+    this.tokens = this.$route.query.auth
+    if (this.tokens) {
+      this.$store.commit('user/userToken', this.tokens)
+      this.$http.get(this.$api.bigScreen)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.jurisdiction = true
+          }
+        })
+        .catch(() => {
+          this.banckLogin()
+        })
+    } else {
+      this.banckLogin()
+    }
   }
 }
 </script>
@@ -38,12 +65,13 @@ export default {
   min-height: calc(100vh);
   margin: 0 auto;
   box-sizing: content-box;
-  background: #010e50 url(../../assets/images/bigscreen.png) center top no-repeat;
+  background: #010e50 url(../../assets/images/bigscreen.png) center top
+    no-repeat;
   background-size: 100% 100%;
   line-height: 1.15;
   position: relative;
 }
-.show-box{
+.show-box {
   width: 100%;
   min-height: calc(100vh);
 }
@@ -55,7 +83,7 @@ export default {
   width: 100%;
   min-height: calc(100vh);
 }
-.back-hone{
+.back-hone {
   color: rgba(240, 16, 27, 0.74);
   position: absolute;
   left: 0.5rem;

@@ -4,34 +4,44 @@
       <div class="screen-bg">
         新媒体传播效果分析
       </div>
-      <div class="back-hone" v-if="!this.message" @click="backHome">
-         <i class="el-icon-back"></i>
+      <div class="back-hone"
+           v-if="!this.message"
+           @click="backHome">
+        <i class="el-icon-back"></i>
       </div>
     </div>
     <div class="data-content">
       <div class="top">
         <div class="top-left">
-          <img v-if="regiontyp === 'wb'" :src="userDetail.headimg" />
-          <div v-if="regiontyp === 'wx'" class="wx-image" :style="{ 'backgroundImage': 'url(' + userDetail.headimg + ')' }"></div>
+          <img v-if="regiontyp === 'wb'"
+               :src="userDetail.headimg" />
+          <div v-if="regiontyp === 'wx'"
+               class="wx-image"
+               :style="{ 'backgroundImage': 'url(' + userDetail.headimg + ')' }"></div>
           <div class="message">
             <div class="region-type">
               <span class="login-name">{{ userDetail.nickname }}</span>
-              <el-radio-group v-model="regiontyp" @change="tabChannel">
+              <el-radio-group v-model="regiontyp"
+                              @change="tabChannel">
                 <el-radio label="wb">微博</el-radio>
                 <el-radio label="wx">微信公众号</el-radio>
               </el-radio-group>
             </div>
-            <div class="region-name" v-if="regiontyp === 'wx'">
+            <div class="region-name"
+                 v-if="regiontyp === 'wx'">
               <span class="region-title">微信名称:</span>
-              <span class="region-cont" style="margin-right:0.33rem">{{
+              <span class="region-cont"
+                    style="margin-right:0.33rem">{{
                 userDetail.nickname
               }}</span>
               <span class="region-title">微信账号:</span>
               <span class="region-cont">{{ userDetail.name }}</span>
             </div>
-            <div class="region-name" v-if="regiontyp === 'wb'">
+            <div class="region-name"
+                 v-if="regiontyp === 'wb'">
               <span class="region-title">微博名称:</span>
-              <span class="region-cont" style="margin-right:0.33rem">{{
+              <span class="region-cont"
+                    style="margin-right:0.33rem">{{
                 userDetail.nickname
               }}</span>
               <span class="region-title">微博账号:</span>
@@ -39,8 +49,10 @@
             </div>
             <div class="region-brief">
               <span class="region-title">账号简介:</span>
-              <span class="region-cont" v-if="regiontyp === 'wb'">广西壮族自治区人民检察院官方微博。传播检察动态，回应社会关切；传递正义力量，弘扬法治精神。</span>
-              <span class="region-cont" v-if="regiontyp === 'wx'">广西壮族自治区人民检察院微信公众平台。传播检察动态，回应社会关切；传递正义力量，弘扬法治精神。</span>
+              <span class="region-cont"
+                    v-if="regiontyp === 'wb'">广西壮族自治区人民检察院官方微博。传播检察动态，回应社会关切；传递正义力量，弘扬法治精神。</span>
+              <span class="region-cont"
+                    v-if="regiontyp === 'wx'">广西壮族自治区人民检察院微信公众平台。传播检察动态，回应社会关切；传递正义力量，弘扬法治精神。</span>
             </div>
           </div>
         </div>
@@ -48,21 +60,17 @@
           <div class="right-data">
             <div class="region-name">
               <span class="region-title">发稿量:</span>
-              <span class="region-cont"
-                ><i class="blue num">{{ userDetail.count }}</i
-                >个</span
-              >
+              <span class="region-cont"><i class="blue num">{{ userDetail.count }}</i>个</span>
             </div>
-            <div class="region-name" v-if="regiontyp === 'wb'">
+            <div class="region-name"
+                 v-if="regiontyp === 'wb'">
               <span class="region-title">粉丝数:</span>
               <span class="region-cont"><i class="red num">{{userDetail.fansNum}}</i>个</span>
             </div>
-            <div class="region-name" v-if="regiontyp === 'wx'">
+            <div class="region-name"
+                 v-if="regiontyp === 'wx'">
               <span class="region-title">阅读数:</span>
-              <span class="region-cont"
-                ><i class="red num">{{ userDetail.readSum }}</i
-                >个</span
-              >
+              <span class="region-cont"><i class="red num">{{ userDetail.readSum }}</i>个</span>
             </div>
             <div class="region-name">
               <span class="region-title">最后更新时间:</span>
@@ -73,72 +81,82 @@
           <div id="dashboard"></div>
           <div class="status">
             <span class="region-title">运行状态</span>
-            <span v-if="this.dataArr<=30" class="status-data ordinary">一般</span>
-            <span v-if="this.dataArr>30&&this.dataArr<=60" class="status-data good">良好</span>
-            <span v-if="this.dataArr>60" class="status-data best">优秀</span>
+            <span v-if="this.dataArr<=30"
+                  class="status-data ordinary">一般</span>
+            <span v-if="this.dataArr>30&&this.dataArr<=60"
+                  class="status-data good">良好</span>
+            <span v-if="this.dataArr>60"
+                  class="status-data best">优秀</span>
           </div>
         </div>
       </div>
       <div class="line-center">
         <div class="tab-right">
-          <el-button
-            size="small"
-            :class="switchTab ? 'btn-active' : ''"
-            @click="switchUser"
-            >用户互动</el-button>
-          <el-button
-            size="small"
-            :class="switchTab ? '' : 'btn-active'"
-            @click="switchArticle"
-            >最新文章</el-button>
+          <el-button size="small"
+                     :class="switchTab ? 'btn-active' : ''"
+                     @click="switchUser">用户互动</el-button>
+          <el-button size="small"
+                     :class="switchTab ? '' : 'btn-active'"
+                     @click="switchArticle">最新文章</el-button>
         </div>
         <!-- 传播趋势图 -->
-        <div id="line-tab" @mouseenter="readEnter()"
-           @mouseleave="readLeave()"></div>
+        <div id="line-tab"
+             @mouseenter="readEnter()"
+             @mouseleave="readLeave()"></div>
       </div>
       <div class="bottom">
         <div class="left-bar">
           <div class="title">
             <span>{{leftTitle}}</span>
           </div>
-          <div v-show="regiontyp==='wb'" class="article-content">
+          <div v-show="regiontyp==='wb'"
+               class="article-content">
             <p class="article-top">
-                  <span class="article-num" style="width:8%">排名</span>
-                  <span class="new-company" style="text-align:center;">文章列表</span>
-                  <span class="article-num">转发数</span>
-                  <span class="article-num">点赞数</span>
-                  <span class="article-num">评论数</span>
+              <span class="article-num"
+                    style="width:8%">排名</span>
+              <span class="new-company"
+                    style="text-align:center;">文章列表</span>
+              <span class="article-num">转发数</span>
+              <span class="article-num">点赞数</span>
+              <span class="article-num">评论数</span>
             </p>
-                <div id="area-article"
-                     class="tubiao-size">
-                  <ul class="new-list"
-                      :class="{anim:animateList}"
-                      @mouseenter="StopList()"
-                      @mouseleave="UpList()">
-                    <li v-for="(item,index) in tableData"
-                        :key="index"
-                        class="show-article">
-                      <span class="article-num" style="width:8%">{{item.rank}}</span>
-                      <span class="new-company" v-html="item.text" @click="getrelation('0', '1',item.uuid)"></span>
-                      <span class="article-num">{{item.repostNum}}</span>
-                      <span class="article-num">{{item.likeNum}}</span>
-                      <span class="article-num">{{item.commentNum}}</span>
-                    </li>
-                  </ul>
-                </div>
+            <div id="area-article"
+                 class="tubiao-size">
+              <ul class="new-list"
+                  :class="{anim:animateList}"
+                  @mouseenter="StopList()"
+                  @mouseleave="UpList()">
+                <li v-for="(item,index) in tableData"
+                    :key="index"
+                    class="show-article">
+                  <span class="article-num"
+                        style="width:8%">{{item.rank}}</span>
+                  <span class="new-company"
+                        v-html="item.text"
+                        @click="getrelation('0', '1',item.uuid)"></span>
+                  <span class="article-num">{{item.repostNum}}</span>
+                  <span class="article-num">{{item.likeNum}}</span>
+                  <span class="article-num">{{item.commentNum}}</span>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div v-show="regiontyp==='wx'"  id="left-bar" @mouseenter="barEnter()"
-           @mouseleave="barLeave()"></div>
+          <div v-show="regiontyp==='wx'"
+               id="left-bar"
+               @mouseenter="barEnter()"
+               @mouseleave="barLeave()"></div>
         </div>
         <div class="right-relation">
           <div class="title">
             <span>{{rightTitle}}</span>
           </div>
-          <div v-show="regiontyp==='wx'" class="power-ranking">
+          <div v-show="regiontyp==='wx'"
+               class="power-ranking">
             <div class="ranking-box">
               <div class="first-ranking ranking-flex">
                 <ul>
-                  <li v-for="item in rankingFirst" :key="item.rank">
+                  <li v-for="item in rankingFirst"
+                      :key="item.rank">
                     <span class="ranking">{{item.rank+1}}</span>
                     <span class="power">{{item.value}}</span>
                   </li>
@@ -146,7 +164,8 @@
               </div>
               <div class="last-ranking ranking-flex">
                 <ul>
-                  <li v-for="item in rankingLast" :key="item.rank">
+                  <li v-for="item in rankingLast"
+                      :key="item.rank">
                     <span class="ranking">{{item.rank+1}}</span>
                     <span class="power">{{item.value}}</span>
                   </li>
@@ -154,8 +173,9 @@
               </div>
             </div>
           </div>
-          <div v-show="regiontyp==='wb'" class="power-route">
-              <div id="right-relation"></div>
+          <div v-show="regiontyp==='wb'"
+               class="power-route">
+            <div id="right-relation"></div>
           </div>
         </div>
       </div>
@@ -207,6 +227,13 @@ export default {
     }
   },
   methods: {
+    // 返回登录
+    banckLogin () {
+      setTimeout(function () {
+        let url = window.g.login
+        window.open(url, '_self')
+      }, 2000)
+    },
     backHome () {
       this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
     },
@@ -358,7 +385,7 @@ export default {
             columnar.resize()
           })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     // 用户互动数据
     switchUser () {
@@ -375,7 +402,7 @@ export default {
           this.userTime = res.data.data.listTime
           this.gitLineCenter()
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     // 最新文章数据
     switchArticle () {
@@ -752,7 +779,7 @@ export default {
             this.leftBar = barCharts
             this.barLeave()
           })
-          .catch(() => {})
+          .catch(() => { })
       } else if (this.regiontyp === 'wb') {
         this.leftTitle = '热门文章Top10'
         this.topApi = this.$api.popularArticlesTop10
@@ -768,7 +795,7 @@ export default {
             this.UpList()
             resolve()
           })
-          .catch(() => {})
+          .catch(() => { })
       }
     },
     // 鼠标移出
@@ -814,7 +841,7 @@ export default {
             }
           })
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     // 关系图
     getrelation (resolve, reject, uuid) {
@@ -893,7 +920,7 @@ export default {
           })
           resolve()
         })
-        .catch(() => {})
+        .catch(() => { })
     },
     tabChannel () {
       this.getuser()
@@ -916,14 +943,14 @@ export default {
           .then(res => {
             this.userDetail = res.data.data
           })
-          .catch(() => {})
+          .catch(() => { })
       } else if (this.regiontyp === 'wb') {
         this.$http
           .get(this.$api.wbInformation)
           .then(res => {
             this.userDetail = res.data.data
           })
-          .catch(() => {})
+          .catch(() => { })
       }
     },
     // 文章列表动画
@@ -951,24 +978,42 @@ export default {
     }
   },
   created () {
-    this.getuser()
-    this.switchUser()
+    this.tokens = this.$route.query.auth
+    if (this.tokens) {
+      this.$store.commit('user/userToken', this.tokens)
+      this.$http.get(this.$api.bigScreen)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.getuser()
+            this.switchUser()
+          }
+        })
+        .catch(() => {
+          this.banckLogin()
+        })
+    } else {
+      this.banckLogin()
+    }
   },
   mounted () {
-    this.getDashboard()
-    this.getLeftBar()
-    if (this.regiontyp === 'wx') {
-      this.getPowerRanking()
-    } else if (this.regiontyp === 'wb') {
-      new Promise(this.getLeftBar).then(res => {
-        return new Promise(this.getrelation)
-      }).catch(() => { })
+    if (this.tokens) {
+      this.getDashboard()
+      this.getLeftBar()
+      if (this.regiontyp === 'wx') {
+        this.getPowerRanking()
+      } else if (this.regiontyp === 'wb') {
+        new Promise(this.getLeftBar).then(res => {
+          return new Promise(this.getrelation)
+        }).catch(() => { })
+      }
+    } else {
+      this.banckLogin()
     }
   }
 }
 </script>
 <style lang="scss">
-@import "./screen";
+@import './screen';
 </style>
 <style lang="css" scoped>
 .screen-box {
@@ -986,7 +1031,7 @@ export default {
   height: 1.8rem;
   margin: 0 auto;
 }
-.screen-bg{
+.screen-bg {
   display: block;
   background: url(../../assets/images/TOP_BG.png) center top no-repeat;
   background-size: 50% 2rem;
@@ -1030,7 +1075,7 @@ export default {
   color: #fff;
   border: 1px solid rgba(46, 189, 255, 0.555);
   z-index: 9999;
-  padding: .125rem .2083rem;
+  padding: 0.125rem 0.2083rem;
   font-size: 0.22rem;
 }
 #line-tab {
@@ -1071,12 +1116,12 @@ export default {
     #0068b5 100%
   ); /*用线性渐变创建图像*/
   display: inline-block;
-  padding: 0.11rem  1.11rem;
+  padding: 0.11rem 1.11rem;
   color: #fff;
   margin: 0 auto;
   font-size: 0.33rem;
 }
-#left-bar{
+#left-bar {
   width: 100%;
   height: 90%;
 }
@@ -1096,7 +1141,7 @@ export default {
   border-radius: 50%;
   vertical-align: middle;
 }
-.wx-image{
+.wx-image {
   width: 2.444rem;
   height: 2.444rem;
   border-radius: 50%;
@@ -1174,7 +1219,7 @@ export default {
 .status {
   color: #fff;
 }
-.status .region-title{
+.status .region-title {
   display: block;
   width: 100%;
   text-align: center;
@@ -1186,74 +1231,75 @@ export default {
   text-align: center;
   padding: 0.22rem 0;
 }
-.ordinary{
-  background-color: rgba(255,0,0,0.8);
+.ordinary {
+  background-color: rgba(255, 0, 0, 0.8);
 }
-.good{
-  background-color:rgba(0,255,255,0.8);
+.good {
+  background-color: rgba(0, 255, 255, 0.8);
 }
-.best{
+.best {
   background-color: #00c026;
 }
-.power-ranking,.power-route{
+.power-ranking,
+.power-route {
   width: 100%;
   height: 90%;
 }
-#dashboard{
+#dashboard {
   width: 40%;
   height: 100%;
 }
 .tab-right .btn-active {
   background-color: rgba(46, 189, 255, 0.555);
 }
-.ranking-box{
+.ranking-box {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
 }
-.ranking-flex{
+.ranking-flex {
   width: 50%;
   height: 100%;
 }
-.ranking-flex ul{
+.ranking-flex ul {
   height: 100%;
 }
-.ranking-flex ul li:nth-of-type(2){
+.ranking-flex ul li:nth-of-type(2) {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.ranking-flex ul li:nth-of-type(4){
+.ranking-flex ul li:nth-of-type(4) {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.first-ranking ul li:nth-of-type(1) .ranking{
+.first-ranking ul li:nth-of-type(1) .ranking {
   padding: 0.07rem;
-  background-color: rgba(255,0,0,0.8);
+  background-color: rgba(255, 0, 0, 0.8);
   border-radius: 50%;
 }
-.first-ranking ul li:nth-of-type(2) .ranking{
+.first-ranking ul li:nth-of-type(2) .ranking {
   padding: 0.07rem;
-  background-color: rgba(0,255,0,0.8);
+  background-color: rgba(0, 255, 0, 0.8);
   border-radius: 50%;
 }
-.first-ranking ul li:nth-of-type(3) .ranking{
+.first-ranking ul li:nth-of-type(3) .ranking {
   padding: 0.07rem;
-  background-color: rgba(239,57,17,0.8);
+  background-color: rgba(239, 57, 17, 0.8);
   border-radius: 50%;
 }
-.ranking-flex li{
+.ranking-flex li {
   height: 20%;
   font-size: 0.33rem;
   display: flex;
   justify-content: space-around;
   color: #fff;
 }
-.first-ranking li{
+.first-ranking li {
   padding: 0 14% 0 25%;
 }
-.last-ranking li{
+.last-ranking li {
   padding: 0 25% 0 14%;
 }
-.ranking-flex .ranking{
+.ranking-flex .ranking {
   display: inline-block;
   width: 0.34rem;
   height: 0.34rem;
@@ -1261,7 +1307,7 @@ export default {
   line-height: 0.34rem;
   align-self: center;
 }
-.ranking-flex .power{
+.ranking-flex .power {
   display: inline-block;
   width: 60%;
   align-self: center;
@@ -1307,18 +1353,17 @@ export default {
   height: 0.8rem;
   line-height: 0.8rem;
 }
-.article-num{
+.article-num {
   width: 14%;
   text-align: center;
 }
-.new-company{
+.new-company {
   width: 50%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
 }
-.show-article .new-company{
+.show-article .new-company {
   cursor: pointer;
   text-decoration: underline;
   text-align: left;
@@ -1326,10 +1371,11 @@ export default {
 .tubiao-size {
   overflow: hidden;
 }
-.region-name,.region-type{
+.region-name,
+.region-type {
   display: flex;
 }
-.back-hone{
+.back-hone {
   color: rgba(240, 16, 27, 0.74);
   position: absolute;
   left: 0.5rem;

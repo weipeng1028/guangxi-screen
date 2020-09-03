@@ -2,7 +2,7 @@
  * @Author: MaiChao
  * @Date: 2020-06-16 14:52:35
  * @LastEditors: MaiChao
- * @LastEditTime: 2020-09-02 17:07:01
+ * @LastEditTime: 2020-09-02 20:17:45
  */
 window.g = {
   baseUrl: 'http://47.93.1.52',

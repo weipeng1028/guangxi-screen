@@ -1,5 +1,6 @@
 <template>
-  <div class="screen-box">
+  <div class="screen-box"
+       v-if='jurisdiction'>
     <div class="screen-title">
       <div class="screen-bg">
         新媒体优秀作品展示
@@ -65,7 +66,7 @@
             </el-carousel>
             <div v-else
                  class="content-center">
-                <p>暂无数据</p>
+              <p>暂无数据</p>
             </div>
           </div>
         </div>
@@ -75,7 +76,8 @@
           <p>优秀图片展示</p>
         </div>
         <div class="swiper-box"
-             ref="element" v-if="articleData.length>0">
+             ref="element"
+             v-if="articleData.length>0">
           <div ref="bannerbox"
                v-for="(item, index) in articleData"
                :key="index"
@@ -87,9 +89,9 @@
           </div>
         </div>
         <div v-else
-                 class="content-center">
-                <p>暂无数据</p>
-            </div>
+             class="content-center">
+          <p>暂无数据</p>
+        </div>
       </div>
     </div>
   </div>
@@ -101,6 +103,7 @@ export default {
   props: ['message'],
   data () {
     return {
+      jurisdiction: false,
       animateRank: false,
       intNumRank: undefined,
       videoData: {
@@ -114,6 +117,13 @@ export default {
     }
   },
   methods: {
+    // 返回登录
+    banckLogin () {
+      setTimeout(function () {
+        let url = window.g.login
+        window.open(url, '_self')
+      }, 2000)
+    },
     backHome () {
       this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
     },
@@ -189,15 +199,34 @@ export default {
     }
   },
   created () {
+    this.tokens = this.$route.query.auth
+    if (this.tokens) {
+      this.$store.commit('user/userToken', this.tokens)
+      this.$http.get(this.$api.bigScreen)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.jurisdiction = true
+            this.getVideo()
+            this.getArticle()
+          }
+        })
+        .catch(() => {
+          this.banckLogin()
+        })
+    } else {
+      this.banckLogin()
+    }
     var oMeta = document.createElement('meta')
     oMeta.name = 'referrer'
     oMeta.content = 'never'
     document.getElementsByTagName('head')[0].appendChild(oMeta)
-    this.getVideo()
-    this.getArticle()
   },
   mounted () {
-    this.startSwiper()
+    if (this.tokens) {
+      this.startSwiper()
+    } else {
+      this.banckLogin()
+    }
   }
 }
 </script>
@@ -419,9 +448,9 @@ export default {
   height: 100%;
   text-align: center;
 }
-.content-center p{
+.content-center p {
   width: 100%;
-    font-size: 0.33rem;
+  font-size: 0.33rem;
   align-self: center;
 }
 </style>

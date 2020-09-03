@@ -58,17 +58,23 @@ export default {
           }
         })
         .catch(() => {
-          setTimeout(function () {
-            let url = window.g.login
-            window.open(url, '_self')
-          }, 2000)
+          this.banckLogin()
         })
+    } else {
+      this.banckLogin()
     }
   },
   mounted () {
     this.atInit()
   },
   methods: {
+    // 返回登录
+    banckLogin () {
+      setTimeout(function () {
+        let url = window.g.login
+        window.open(url, '_self')
+      }, 2000)
+    },
     atResize () {
       this.$root.charts.forEach((myChart) => {
         myChart.resize()
@@ -95,7 +101,7 @@ export default {
       }
     },
     dbclickChart (index) {
-      this.$router.push({ name: index })
+      this.$router.push({ name: index, query: { auth: this.tokens } })
     },
     atSetStyle (el1, el2) {
       let transform1 = el1.style.transform

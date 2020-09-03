@@ -1,94 +1,97 @@
 <template>
   <div class="screen-box">
-    <div class="screen-title">
-      <div class="screen-bg">
-        新媒体大屏统计分析
-      </div>
-      <div class="back-hone"
-           v-if="!this.message"
-           @click="backHome">
-        <i class="el-icon-back"></i>
-      </div>
-    </div>
-    <div class="data-content">
-      <div class="con-left">
-        <div class="left-top">
-          <region></region>
+    <div>
+      <div class="screen-title">
+        <div class="screen-bg">
+          新媒体大屏统计分析
         </div>
-        <div class="left-bottom">
-          <div class="release-box">
-            <release></release>
+        <div class="back-hone"
+             v-if="!this.message"
+             @click="backHome">
+          <i class="el-icon-back"></i>
+        </div>
+      </div>
+      <div class="data-content">
+        <div class="con-left">
+          <div class="left-top">
+            <region></region>
+          </div>
+          <div class="left-bottom">
+            <div class="release-box">
+              <release></release>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="con-center">
-        <div class="center-top">
-          <div id="map-show"
-               class="cen-top map"></div>
+        <div class="con-center">
+          <div class="center-top">
+            <div id="map-show"
+                 class="cen-top map"></div>
+          </div>
         </div>
-      </div>
-      <div class="con-right">
-        <div class="right-top">
-          <div class="article">
-            <div class="top-num">
-              <div class="wb-fans top-box">
-                <div>
-                  <p class="name">总文章发布条数</p>
-                  <p class="num"
-                     v-text="this.totalPublish"></p>
+        <div class="con-right">
+          <div class="right-top">
+            <div class="article">
+              <div class="top-num">
+                <div class="wb-fans top-box">
+                  <div>
+                    <p class="name">总文章发布条数</p>
+                    <p class="num"
+                       v-text="this.totalPublish"></p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- 文章列表 -->
-            <div class="area-article">
-              <div class="title-tabs"
-                   @mouseenter="StopList()"
-                   @mouseleave="UpList()">
-                <span @click="checkdTab(1)"
-                      :class="wxActive?'aricle-active':''"> <img :src="require('@/assets/images/wx.png')">微信</span>
-                <span @click="checkdTab(2)"
-                      :class="wbActive?'aricle-active':''"><img :src="require('@/assets/images/wb.png')">微博</span>
-                <span @click="checkdTab(3)"
-                      :class="tdActive?'aricle-active':''"><img :src="require('@/assets/images/tt.png')">今日头条</span>
-                <!-- <span @click="checkdTab(4)"
+              <!-- 文章列表 -->
+              <div class="area-article">
+                <div class="title-tabs"
+                     @mouseenter="StopList()"
+                     @mouseleave="UpList()">
+                  <span @click="checkdTab(1)"
+                        :class="wxActive?'aricle-active':''"> <img :src="require('@/assets/images/wx.png')">微信</span>
+                  <span @click="checkdTab(2)"
+                        :class="wbActive?'aricle-active':''"><img :src="require('@/assets/images/wb.png')">微博</span>
+                  <span @click="checkdTab(3)"
+                        :class="tdActive?'aricle-active':''"><img :src="require('@/assets/images/tt.png')">今日头条</span>
+                  <!-- <span @click="checkdTab(4)"
                       :class="dyActive?'aricle-active':''"><img :src="require('@/assets/images/dy.png')">抖音</span> -->
-              </div>
-              <div class="article-content">
-                <p class="article-top">
-                  <span class="new-company"
-                        v-text="this.typeof"></span>
-                  <span style="width:15%;text-align:center;">阅读量</span>
-                </p>
-                <div id="area-article"
-                     class="tubiao-size">
-                  <ul class="new-list"
-                      v-if="articleList.length>0"
-                      :class="{anim:animateList}"
-                      @mouseenter="StopList()"
-                      @mouseleave="UpList()">
-                    <li v-for="(item,index) in articleList"
-                        :key="index"
-                        class="show-article">
-                      <span @click="activeWeb(item)"
-                            class="new-company"
-                            v-html="item.title"></span>
-                      <span style="width:15%;text-align:center;">{{item.readNum}}</span>
-                    </li>
-                  </ul>
-                  <div v-else
-                       class="content-center">
-                    <p>暂无数据</p>
+                </div>
+                <div class="article-content">
+                  <p class="article-top">
+                    <span class="new-company"
+                          v-text="this.typeof"></span>
+                    <span style="width:15%;text-align:center;">阅读量</span>
+                  </p>
+                  <div id="area-article"
+                       class="tubiao-size">
+                    <ul class="new-list"
+                        v-if="articleList.length>0"
+                        :class="{anim:animateList}"
+                        @mouseenter="StopList()"
+                        @mouseleave="UpList()">
+                      <li v-for="(item,index) in articleList"
+                          :key="index"
+                          class="show-article">
+                        <span @click="activeWeb(item)"
+                              class="new-company"
+                              v-html="item.title"></span>
+                        <span style="width:15%;text-align:center;">{{item.readNum}}</span>
+                      </li>
+                    </ul>
+                    <div v-else
+                         class="content-center">
+                      <p>暂无数据</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="right-bottom">
-          <read></read>
+          <div class="right-bottom">
+            <read></read>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -125,6 +128,13 @@ export default {
     }
   },
   methods: {
+    // 返回登录
+    banckLogin () {
+      setTimeout(function () {
+        let url = window.g.login
+        window.open(url, '_self')
+      }, 2000)
+    },
     // 地图
     monitorMap () {
       let monitorMap = echarts.init(document.getElementById('map-show'))
@@ -494,16 +504,28 @@ export default {
       this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
     }
   },
-  created () {
-    this.getTotalPublish()
-    this.getarticle() // 最新文章
+  mounted () {
+    this.tokens = this.$route.query.auth
+    console.log(this.tokens)
+    if (this.tokens) {
+      this.$store.commit('user/userToken', this.tokens)
+      this.$http.get(this.$api.bigScreen)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.monitorMap()
+            this.getTotalPublish()
+            this.getarticle() // 最新文章
+          }
+        })
+        .catch(() => {
+          this.banckLogin()
+        })
+    } else {
+      this.banckLogin()
+    }
   },
   destroyed () {
     clearInterval(this.fhourTime)
-  },
-  mounted () {
-    this.monitorMap()
-    // this.drawLine()
   },
   components: {
     region,
