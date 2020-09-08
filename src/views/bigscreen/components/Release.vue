@@ -52,7 +52,7 @@ export default {
               top: 'center'
             },
             legend: {
-              data: ['趋势', '三十天', '六十天', '九十天'],
+              data: ['趋势', '30天', '60天', '90天'],
               top: '5%',
               center: 'center',
               textStyle: {
