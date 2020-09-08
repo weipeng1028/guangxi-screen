@@ -3,7 +3,7 @@
  * @Author: MaiChao
  * @Date: 2020-06-10 13:50:15
  * @LastEditors: MaiChao
- * @LastEditTime: 2020-09-02 20:14:03
+ * @LastEditTime: 2020-09-04 11:22:53
 -->
 <template>
   <div class="screen-box"
@@ -53,6 +53,7 @@ export default {
           this.banckLogin()
         })
     } else {
+      this.$message.danger('权限不足,不能访问!')
       this.banckLogin()
     }
   }

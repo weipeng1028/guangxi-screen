@@ -214,6 +214,7 @@ export default {
           this.banckLogin()
         })
     } else {
+      this.$message.danger('权限不足,不能访问!')
       this.banckLogin()
     }
     var oMeta = document.createElement('meta')

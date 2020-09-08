@@ -506,7 +506,6 @@ export default {
   },
   mounted () {
     this.tokens = this.$route.query.auth
-    console.log(this.tokens)
     if (this.tokens) {
       this.$store.commit('user/userToken', this.tokens)
       this.$http.get(this.$api.bigScreen)
@@ -521,6 +520,7 @@ export default {
           this.banckLogin()
         })
     } else {
+      this.$message.danger('权限不足,不能访问!')
       this.banckLogin()
     }
   },
