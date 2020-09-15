@@ -10,7 +10,7 @@
       </div>
       <div class="top-box">
         <div>
-          <p class="name">微信关注总条数</p>
+          <p class="name">微信已关注用户数</p>
           <p class="num"
              v-text="this.wxFans"></p>
         </div>
