@@ -23,8 +23,8 @@
               <span class="login-name">{{ userDetail.nickname }}</span>
               <el-radio-group v-model="regiontyp"
                               @change="tabChannel">
-                <el-radio label="wb">微博</el-radio>
                 <el-radio label="wx">微信公众号</el-radio>
+                <el-radio label="wb">微博</el-radio>
               </el-radio-group>
             </div>
             <div class="region-name"
@@ -206,7 +206,7 @@ export default {
       animateList: false,
       dataArr: 65,
       userDetail: {},
-      regiontyp: 'wb',
+      regiontyp: 'wx',
       leftTitle: '被公众号转载Top10',
       rightTitle: '传播力排行榜',
       switchTab: true,

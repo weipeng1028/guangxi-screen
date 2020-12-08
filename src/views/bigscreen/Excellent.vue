@@ -18,22 +18,28 @@
             <p>优秀视频展示</p>
           </div>
           <div class="video-content">
-            <div>
+            <div style="height:100%">
               <div class="swiper-container">
-                <div class="swiper-wrapper"
-                     @mouseenter="stopSwiper"
-                     @mouseleave="restSwiper">
-                  <div class="swiper-slide slide_item"
-                       v-for="(item,i) in images"
-                       :key="i">
-                    <div class="img-box">
+                <swiper ref="mySwiper"
+                        class="swiper-wrapper"
+                        :options="swiperOptions"
+                        @mouseenter="stopSwiper"
+                        @mouseleave="restSwiper">
+                  <swiper-slide class="swiper-slide slide_item"
+                                v-for="(item,i) in images"
+                                :key="i">
+                    <div class="img-box" @click="routerWeb(item)">
                       <img :src="item.coverUrl" />
                     </div>
                     <img :src="require('@/assets/images/text/autoPlay.png')"
                          @click="routerWeb(item)"
                          class="center-img">
-                  </div>
-                </div>
+                  </swiper-slide>
+                  <div class="swiper-button-prev"
+                       slot="button-prev"></div>
+                  <div class="swiper-button-next"
+                       slot="button-next"></div>
+                </swiper>
               </div>
             </div>
           </div>
@@ -51,15 +57,16 @@
               <el-carousel-item v-for="(item, index) in articleData"
                                 :key="index">
                 <div class="article-cont">
-                  <div class="article-title"
-                       v-html="item.title">
+                  <div class="article-title" v-if="item.content"
+                       v-html="item.title" >
                   </div>
                   <div class="article-text">
                     <img ref="banner"
                          @click="findArticle(item, index)"
                          :src="item.cover"
                          class="bannerImg">
-                    {{item.content}}
+                    <span v-if="item.content" v-html="item.content"></span>
+                    <span v-else v-html="item.title"></span>
                   </div>
                 </div>
               </el-carousel-item>
@@ -81,7 +88,7 @@
           <div ref="bannerbox"
                v-for="(item, index) in articleData"
                :key="index"
-               class="bannerbox">
+              :class="articleData.length>4?'bannerbox':'bannerbox-one'">
             <img ref="banner"
                  @click="findArticle(item, index)"
                  :src="item.cover"
@@ -97,8 +104,8 @@
   </div>
 </template>
 <script>
-import Swiper from 'swiper'
-import 'swiper/dist/css/swiper.min.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 export default {
   props: ['message'],
   data () {
@@ -113,28 +120,7 @@ export default {
       images: [],
       articleData: [],
       bannerImgLst: [],
-      mySwiper: {}
-    }
-  },
-  methods: {
-    // 返回登录
-    banckLogin () {
-      setTimeout(function () {
-        let url = window.g.login
-        window.open(url, '_self')
-      }, 2000)
-    },
-    backHome () {
-      this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
-    },
-    stopSwiper () {
-      this.mySwiper.stopAutoplay()
-    },
-    restSwiper () {
-      this.mySwiper.startAutoplay()
-    },
-    startSwiper () {
-      this.mySwiper = new Swiper('.swiper-container', {
+      swiperOptions: {
         initialSlide: 0,
         loop: true,
         speed: 2000,
@@ -160,7 +146,29 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         }
-      })
+      }
+    }
+  },
+  components: {
+    swiper,
+    swiperSlide
+  },
+  methods: {
+    // 返回登录
+    banckLogin () {
+      setTimeout(function () {
+        let url = window.g.login
+        window.open(url, '_self')
+      }, 2000)
+    },
+    backHome () {
+      this.$router.push({ name: 'dashboard', query: { auth: this.$store.state.user.token } })
+    },
+    stopSwiper () {
+      this.$refs.mySwiper.swiper.autoplay.stop()
+    },
+    restSwiper () {
+      this.$refs.mySwiper.swiper.autoplay.start()
     },
     // 获取优秀视频
     getVideo () {
@@ -223,9 +231,7 @@ export default {
     document.getElementsByTagName('head')[0].appendChild(oMeta)
   },
   mounted () {
-    if (this.tokens) {
-      this.startSwiper()
-    } else {
+    if (!this.tokens) {
       this.banckLogin()
     }
   }
@@ -339,6 +345,12 @@ export default {
 .bottom .title-border {
   margin-top: 0.22rem;
 }
+.bannerbox-one {
+  min-width: 25%;
+  height: 100%;
+  margin-right: 10px;
+  /* animation: 50s wordsLoop linear infinite normal; */
+}
 .bannerbox {
   min-width: 25%;
   height: 100%;
@@ -384,8 +396,8 @@ export default {
   color: #fff;
 }
 .article-cont .bannerImg {
-  width: 25%;
-  height: 25%;
+  width: 40%;
+  height: 60%;
   float: left;
   margin: 0 0.14rem 0.14rem 0;
 }
@@ -396,9 +408,10 @@ export default {
   margin-bottom: 0.08rem;
 }
 .article-text {
-  font-size: 0.33rem;
+  font-size: 0.44rem;
   letter-spacing: 0.05rem;
   line-height: 1.4;
+  height: 100%;
 }
 /**视频 */
 .video-content {
@@ -416,6 +429,9 @@ export default {
   height: 100%;
 }
 .swiper-slide {
+  height: 100%;
+}
+.swiper-wrapper {
   height: 100%;
 }
 .swiper-slide .img-box {
